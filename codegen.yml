@@ -1,0 +1,7 @@
+overwrite: true
+schema: "https://qappatlas.azurewebsites.net/graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
