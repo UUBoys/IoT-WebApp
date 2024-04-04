@@ -1,0 +1,35 @@
+{
+  "pages": {
+    "auth": {
+      "form": {
+        "name": {
+          "label": "Jméno",
+          "placeholder": "Zadejte jméno"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Zadejte email"
+        },
+        "signInWith": {
+          "google": "Přihlásit se přes Google"
+        },
+        "password": {
+          "label": "Heslo",
+          "placeholder": "********",
+          "passwordRepeat": "Zadejte heslo znovu"
+        }
+      },
+      "login": {
+        "header": "Přihlášení",
+        "button": "Přihlásit se",
+        "googleButton": "Přihlásit se přes Google",
+        "register": "Nemáte účet? Zaregistrujte se zde"
+      },
+      "register": {
+        "header": "Registrace",
+        "button": "Registrovat se",
+        "login": "Máte účet? Přihlašte se zde"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "pages": {
+    "auth": {
+      "form": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter email"
+        },
+        "signInWith": {
+          "google": "Sign in with Google"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "********",
+          "passwordRepeat": "Repeat password"
+        }
+      },
+      "login": {
+        "header": "Login",
+        "button": "Login",
+        "googleButton": "Login with Google",
+        "register": "Don't have an account yet? Register here"
+      },
+      "register": {
+        "header": "Register",
+        "button": "Register",
+        "login": "Already have an account? Login here"
+      }
+    }
+  }
+}

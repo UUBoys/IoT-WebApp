@@ -1,19 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { ApolloClient, InMemoryCache } from "@apollo/client";
 import jwt from "jsonwebtoken";
 import NextAuth, { User, type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-
-import {
-  Mutation,
-  MutationGoogleOAuthArgs,
-  MutationLoginArgs,
-} from "../../../generated/graphql";
-
-import { GOOGLE_AUTH_MUTATION } from "@/modules/GRAPHQL/mutations/GoogleAuthMutation";
-import { LOGIN_MUTATION } from "@/modules/GRAPHQL/mutations/LoginMutation";
-import { signInSchema } from "@/modules/utils/schemas/auth";
 
 export const AUTH_ROUTES = {
   signIn: "/auth/signin",
@@ -45,38 +34,39 @@ export const authOptions: NextAuthOptions = {
         },
       },
       authorize: async (credentials) => {
-        const creds = await signInSchema.parseAsync(credentials);
-        const client = new ApolloClient({
-          uri: process.env.API_URL ?? "",
-          cache: new InMemoryCache(),
-        });
-        const variables: MutationLoginArgs = {
-          email: creds.email,
-          password: creds.password,
-        };
-        const response = await client.mutate<Mutation>({
-          mutation: LOGIN_MUTATION,
-          variables,
-          context: {
-            shouldTrackStatus: false,
-          },
-        });
+        console.log(credentials);
+        // const creds = await signInSchema.parseAsync(credentials);
+        // const client = new ApolloClient({
+        //   uri: process.env.API_URL ?? "",
+        //   cache: new InMemoryCache(),
+        // });
+        // const variables: MutationLoginArgs = {
+        //   email: creds.email,
+        //   password: creds.password,
+        // };
+        // const response = await client.mutate<Mutation>({
+        //   mutation: LOGIN_MUTATION,
+        //   variables,
+        //   context: {
+        //     shouldTrackStatus: false,
+        //   },
+        // });
 
-        if (response.errors) {
-          throw new Error(response.errors[0].message);
-        }
+        // if (response.errors) {
+        //   throw new Error(response.errors[0].message);
+        // }
 
-        if (!response.data?.login?.token) throw new Error("No token");
+        // if (!response.data?.login?.token) throw new Error("No token");
 
-        const decodedToken = jwt.decode(response.data?.login?.token);
+        // const decodedToken = jwt.decode(response.data?.login?.token);
 
-        if (!decodedToken) {
-          throw new Error("Invalid user");
-        }
+        // if (!decodedToken) {
+        //   throw new Error("Invalid user");
+        // }
 
-        const userObject = { token: response.data?.login?.token };
+        // const userObject = { token: response.data?.login?.token };
 
-        return userObject as User;
+        return {} as User;
       },
     }),
   ],
@@ -84,36 +74,38 @@ export const authOptions: NextAuthOptions = {
     async signIn({ account, user }) {
       if (!account) return false;
       if (account.provider === "google") {
-        const client = new ApolloClient({
-          uri: process.env.API_URL ?? "",
-          cache: new InMemoryCache(),
-        });
-        // Adapt this to whatever your mutation needs are for registering a Google user.
-        const variables: MutationGoogleOAuthArgs = {
-          idToken: account.id_token as string,
-        };
-        const response = await client.mutate<Mutation>({
-          mutation: GOOGLE_AUTH_MUTATION,
-          variables,
-          context: {
-            shouldTrackStatus: false,
-          },
-        });
-
-        if (response.errors) {
-          throw new Error(response.errors[0].message);
-        }
-
-        if (!response.data?.googleOAuth?.token) throw new Error("No token");
-
-        const decodedToken = jwt.decode(response.data.googleOAuth.token);
-
-        if (!decodedToken) {
-          throw new Error("Invalid user");
-        }
-        user.token = response.data?.googleOAuth.token;
-
-        return true;
+        console.log(user);
+        //     const client = new ApolloClient({
+        //    uri: process.env.API_URL ?? "",
+        //    cache: new InMemoryCache(),
+        //  });
+        //  // Adapt this to whatever your mutation needs are for registering a Google user.
+        //  const variables: MutationGoogleOAuthArgs = {
+        //    idToken: account.id_token as string,
+        //  };
+        //  const response = await client.mutate<Mutation>({
+        //    mutation: GOOGLE_AUTH_MUTATION,
+        //    variables,
+        //    context: {
+        //      shouldTrackStatus: false,
+        //    },
+        //  });
+        //
+        //  if (response.errors) {
+        //    throw new Error(response.errors[0].message);
+        //  }
+        //
+        //  if (!response.data?.googleOAuth?.token) throw new Error("No token");
+        //
+        //  const decodedToken = jwt.decode(response.data.googleOAuth.token);
+        //
+        //  if (!decodedToken) {
+        //    throw new Error("Invalid user");
+        //  }
+        //  user.token = response.data?.googleOAuth.token;
+        //
+        //  return true;
+        // }
       }
       return true;
     },
