@@ -25,6 +25,7 @@ const nextConfig = {
       "ftp.nazornavyuka.cz",
       "uuapp.plus4u.net",
       "s3.amazonaws.com",
+      "fastly.picsum.photos",
       "img.youtube.com",
       "this-person-does-not-exist.com",
       "picsum.photos",

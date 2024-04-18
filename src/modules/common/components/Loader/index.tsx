@@ -45,12 +45,11 @@ const Loader: React.FC<LoaderProps> = ({
             <Lottie
               animationData={qUpLoaderAnimation}
               loop
-              className="w-1/4 
-               "
-            />{" "}
-            <div className="mt-[-70px] bg-gradient-to-b from-[#ff8b56] to-[#fe592b] !bg-clip-text text-[20px] font-bold text-transparent md:text-[60px]">
+              className="w-1/4 "
+            />
+            {/* <div className="mt-[-70px] bg-gradient-to-b from-[#ff8b56] to-[#fe592b] !bg-clip-text text-[20px] font-bold text-transparent md:text-[60px]">
               Načítání...
-            </div>
+            </div> */}
           </div>
         </div>
       );
