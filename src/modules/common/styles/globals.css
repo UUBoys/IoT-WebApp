@@ -7,7 +7,6 @@ html,
 body,
 #__next {
   width: 100% !important;
-  height: 100% !important;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -67,4 +66,12 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+html,
+#__next,
+body {
+  background-color: #4c4c4c;
+  color: white !important;
+  width: 100%;
 }

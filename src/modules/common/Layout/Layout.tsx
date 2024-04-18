@@ -1,11 +1,14 @@
+import clsx from "clsx";
+import { useRouter } from "next/router";
 import { useMemo } from "react";
 
 import Loader from "../components/Loader";
-import NavBar from "../components/NavBar";
+import Navbar from "../components/Navbar";
 import { useApolloStatusStore } from "../stores/apollo-store";
 
 import LayoutContext from "./LyoutContext";
 
+import { isInRestrictedPath } from "@/modules/helpers/general";
 import { LoadingType } from "@/modules/helpers/loader-helpers";
 
 interface LayoutProps {
@@ -14,6 +17,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const contextValue = useMemo(() => ({}), []);
+  const { pathname } = useRouter();
 
   const { isLoading, isError, isSuccess, isWithConfirmation } =
     useApolloStatusStore((set) => ({
@@ -27,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <LayoutContext.Provider value={contextValue}>
       {" "}
       <div className="z-[1000] flex min-h-screen flex-col">
-        <NavBar />
+        <Navbar />
         <Loader
           isCustom={false}
           isError={isError}
@@ -39,7 +43,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               : LoadingType.WITHOUT_CONFIRM
           }
         />
-        <div className="grow">{children}</div>
+        <div
+          className={clsx(
+            !isInRestrictedPath(pathname) && "pt-[64px] sm:pl-[64px]",
+            "grow"
+          )}
+        >
+          {children}
+        </div>
       </div>
     </LayoutContext.Provider>
   );

@@ -1,188 +1,121 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-import { Menu as HeadlessMenu } from "@headlessui/react";
-import AodRoundedIcon from "@mui/icons-material/AodRounded";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import Groups2RoundedIcon from "@mui/icons-material/Groups2Rounded";
-import LocalActivityRoundedIcon from "@mui/icons-material/LocalActivityRounded";
-import LocalAtmRoundedIcon from "@mui/icons-material/LocalAtmRounded";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import MoneyRoundedIcon from "@mui/icons-material/MoneyRounded";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { signOut, useSession } from "next-auth/react";
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { signOut } from "next-auth/react";
+import { useState } from "react";
 
-import { useUserAdditionalDataStore } from "../../stores/user-aditional-data-store";
-import LanguageSelector from "../LanguageSelector";
+import { isInRestrictedPath } from "@/modules/helpers/general";
 
-import Menu from "@/modules/common/components/Menu";
+const Navbar: React.FC = () => {
+  const { pathname } = useRouter();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-const navbarAllowedRoutes = [
-  "/",
-  "/events",
-  "/buyCredits",
-  "/clubs",
-  "/profile",
-  "/profile/settings",
-  "/feed",
-  "/club/create",
-  "/club/*",
-  "/clubs",
-  "/events/*",
-  "/tickets/*",
-];
-
-const regexPatterns = navbarAllowedRoutes.map((route) => {
-  // Escape forward slashes and replace '*' with '.*' for wildcard matches
-  const pattern = route.replace(/\//g, "\\/").replace(/\*/g, ".*");
-  return `^${pattern}$`; // The ^ and $ ensure the pattern matches the whole path
-});
-
-// Combine all regex patterns into one
-const combinedPattern = regexPatterns.join("|");
-const routeRegex = new RegExp(combinedPattern);
-
-const NavBar = () => {
-  const { t } = useTranslation();
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
-  const { pathname, push } = useRouter();
-  const { data: session } = useSession();
-  const { credits } = useUserAdditionalDataStore((set) => ({
-    credits: set.credits,
-  }));
-
-  const isRouteAllowed = (routePathname: string) => {
-    return routeRegex.test(routePathname);
-  };
-
-  if (!isRouteAllowed(pathname)) return null;
-
-  const navigation = [
-    {
-      name: t("components.navbar.links.events"),
-      href: "/events",
-      current: pathname === "/events",
-      ico: <LocalActivityRoundedIcon sx={{ fontSize: "20px" }} />,
-    },
-    {
-      name: t("components.navbar.links.myTickets"),
-      href: "/tickets/myTickets",
-      current: pathname === "/tickets/myTickets",
-      ico: <AodRoundedIcon sx={{ fontSize: "20px" }} />,
-    },
-    {
-      name: t("components.navbar.links.credits"),
-      href: "/buyCredits",
-      current: pathname === "/buyCredits",
-      ico: <MoneyRoundedIcon sx={{ fontSize: "20px" }} />,
-    },
-    {
-      name: t("components.navbar.links.clubs"),
-      href: "/clubs",
-      current: pathname === "/clubs",
-      ico: <Groups2RoundedIcon sx={{ fontSize: "20px" }} />,
-    },
-  ];
+  if (isInRestrictedPath(pathname)) return null;
 
   return (
     <>
-      {/* MOBILE NAVBAR */}
-      <div className="fixed left-[5%] top-[10px] z-20 block w-[90%] rounded-lg  bg-white shadow-2xl transition-all lg:hidden">
-        <div className="flex w-full items-center justify-between p-[10px]">
-          <Link className="flex text-[20px] font-bold" href="/">
-            <p className="text-primary">Q</p>
-            <p className="text-black">APP</p>
-          </Link>
-          <div className="flex items-center gap-[20px]">
-            <div className="bg-primary flex cursor-pointer items-center  gap-[10px] rounded-full px-[20px] text-center font-bold text-white transition-all hover:shadow-xl">
-              <Link
-                href="/buyCredits"
-                className="relative flex items-center gap-[10px] p-1 text-sm"
+      <nav className="max-h-25 fixed left-0 top-0 z-50 flex w-full items-center  justify-start border-b !border-gray-700 !bg-gray-800">
+        <div className="p-3 lg:px-5 lg:pl-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center justify-start rtl:justify-end">
+              <button
+                data-drawer-target="logo-sidebar"
+                data-drawer-toggle="logo-sidebar"
+                aria-controls="logo-sidebar"
+                type="button"
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="!focus:ring-gray-600 ocus:outline-none inline-flex items-center rounded-lg p-2 text-sm !text-white hover:!bg-gray-700  "
               >
-                <LocalAtmRoundedIcon className="h-6 w-6 " aria-hidden="true" />
-                {credits}
+                <span className="sr-only">Open sidebar</span>
+                <svg
+                  className="h-6 w-5 "
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    fillRule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+                  />
+                </svg>
+              </button>
+              <Link
+                href="/"
+                className="ml-5 inline-flex items-center text-xl font-semibold text-white"
+              >
+                <img className="mr-2 h-10" src="/images/logo.png" alt="logo" />
+                PotFriend
               </Link>
             </div>
-            {isMenuOpen ? (
-              <CloseRoundedIcon
-                sx={{ fontSize: "30px", color: "black" }}
-                onClick={() => setIsMenuOpen(false)}
-              />
-            ) : (
-              <MenuRoundedIcon
-                sx={{ fontSize: "30px", color: "black" }}
-                onClick={() => setIsMenuOpen(true)}
-              />
-            )}
           </div>
         </div>
-        {isMenuOpen && (
-          <div className="flex flex-col ">
-            <div className="flex justify-between border-b border-b-gray-200">
-              {session?.user && (
-                <Menu
-                  menuClassName="left-[20px]"
-                  items={[
-                    {
-                      label: t("components.navbar.links.userOptions.account"),
-                      onClick: () => push("/profile"),
-                    },
-                    {
-                      label: t("components.navbar.links.userOptions.myClubs"),
-                      onClick: () => push("/club/myClubs"),
-                    },
-                    {
-                      label: t("components.navbar.links.userOptions.settings"),
-                      onClick: () => push("/profile/settings"),
-                    },
-                    {
-                      label: t("components.navbar.links.userOptions.logout"),
-                      onClick: () => signOut(),
-                    },
-                  ]}
-                >
-                  <HeadlessMenu.Button className="flex flex-col gap-[3px] pb-[10px]">
-                    <p className="text-[14px] font-semibold text-gray-500">
-                      Testovaci ucet
-                    </p>
-                    <p className="text-[12px] text-gray-400">test@test.com</p>
-                  </HeadlessMenu.Button>
-                </Menu>
-              )}
-              {/* <Link className="flex flex-col p-[10px]" href="/profile">
-                <p className="text-[14px] font-semibold text-gray-500">
-                  Testovaci ucet
-                </p>
-                <p className="text-[12px] text-gray-400">test@test.com</p>
-              </Link> */}
-              <LanguageSelector className="mr-[10px] max-w-[66px]" />
-            </div>
-            <div className="my-[10px] flex flex-col gap-[10px] px-[10px]">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={clsx(
-                    item.current
-                      ? "bg-primary text-white"
-                      : "text-gray-700 hover:bg-secondary-500 hover:text-white",
-                    "flex items-center gap-[10px] rounded-md px-3 py-2 text-sm font-medium transition-all"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.ico}
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </div>
+      </nav>
+      <aside
+        id="logo-sidebar"
+        className={clsx(
+          isSidebarOpen && "!w-64",
+          "fixed left-0 top-0 z-40 h-screen w-0 overflow-hidden border-r  !border-gray-700 !bg-gray-800 pt-16 transition-all sm:translate-x-0 md:w-16"
         )}
-      </div>
+        aria-label="Sidebar"
+      >
+        <div className="h-full overflow-y-auto !bg-gray-800 px-3 pb-4">
+          <ul className="space-y-2 pt-4 font-medium">
+            <li>
+              <Link
+                href="/"
+                className={clsx(
+                  pathname === "/" && "!bg-gray-700 ",
+                  " text-nowrap group flex flex-nowrap items-center rounded-lg p-2 !text-white hover:!bg-gray-600 "
+                )}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125Z"
+                  />
+                </svg>
+
+                {isSidebarOpen && <span className="ms-3">Dashboard</span>}
+              </Link>
+            </li>
+            <li>
+              <button
+                onClick={() => signOut()}
+                className="text-nowrap group flex w-full flex-nowrap items-center rounded-lg p-2   text-red-500 hover:!bg-gray-600 "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
+                  />
+                </svg>
+
+                {isSidebarOpen && <span className="ms-3">Odhlásit se</span>}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </aside>
     </>
   );
 };
 
-export default NavBar;
+export default Navbar;

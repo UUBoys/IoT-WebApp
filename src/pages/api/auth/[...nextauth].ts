@@ -50,19 +50,24 @@ export const authOptions: NextAuthOptions = {
             password: creds.password,
           },
         };
-        const response = await client.mutate<Mutation>({
-          mutation: LOGIN_MUTATION,
-          variables,
-          context: {
-            shouldTrackStatus: false,
-          },
-        });
+        let response;
+        try {
+          response = await client.mutate<Mutation>({
+            mutation: LOGIN_MUTATION,
+            variables,
+            context: {
+              shouldTrackStatus: false,
+            },
+          });
+        } catch (error) {
+          console.error(error);
+        }
 
-        if (response.errors) {
+        if (response?.errors) {
           throw new Error(response.errors[0].message);
         }
 
-        if (!response.data?.login?.token) throw new Error("No token");
+        if (!response?.data?.login?.token) throw new Error("No token");
 
         const decodedToken = jwt.decode(response.data?.login?.token);
 

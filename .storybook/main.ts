@@ -37,6 +37,22 @@ const config: StorybookConfig = {
       },
     },
   ],
+  webpackFinal: (config) => {
+    config.module?.rules?.push({
+      test: /\.(jpg|jpeg|png|gif|webp|svg)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/',  // where the images will be served from in Storybook
+          },
+        },
+      ],
+    });
+
+    return config;
+  },
   framework: {
     name: "@storybook/nextjs",
     options: {},
