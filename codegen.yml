@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://qappatlas.azurewebsites.net/graphql"
+schema: "https://potfriend-cloud.azurewebsites.net/graphql"
 generates:
   src/generated/graphql.tsx:
     plugins:

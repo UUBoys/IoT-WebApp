@@ -5,6 +5,7 @@
 "use client";
 
 import Lottie from "lottie-react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -82,7 +83,17 @@ export const SignIn = () => {
               </a>
               <h1 className="mb-2 text-2xl font-bold leading-tight tracking-tight text-white">
                 Vítejte zpět!
-              </h1>
+              </h1>{" "}
+              <p className="text-sm font-light text-gray-300">
+                Ještě nemáte účet?{" "}
+                <Link
+                  href="/auth/signup"
+                  className="font-medium  text-primary-500 hover:underline"
+                >
+                  Registrace
+                </Link>
+                .
+              </p>
               {defaultError !== "" && (
                 <p className="mt-2 text-xl italic text-red-500">
                   {defaultError}
@@ -122,7 +133,7 @@ export const SignIn = () => {
                       name="password"
                       id="password"
                       placeholder={t("pages.auth.form.password.placeholder")}
-                      className="t order-gray-600 block w-full  rounded-lg border bg-gray-700 p-2.5 text-white placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      className=" order-gray-600 block w-full  rounded-lg border bg-gray-700 p-2.5 text-white placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     />
                   </div>
                 </div>

@@ -1,8 +1,14 @@
 /* eslint-disable no-param-reassign */
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import jwt from "jsonwebtoken";
 import NextAuth, { User, type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+
+import { Mutation, MutationLoginArgs } from "../../../generated/graphql";
+
+import { LOGIN_MUTATION } from "@/modules/GRAPHQL/mutations/LoginMutation";
+import { signInSchema } from "@/modules/utils/schemas/auth";
 
 export const AUTH_ROUTES = {
   signIn: "/auth/signin",
@@ -11,7 +17,6 @@ export const AUTH_ROUTES = {
 };
 
 export const authOptions: NextAuthOptions = {
-  // Configure one or more authentication providers
   pages: AUTH_ROUTES,
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
@@ -34,86 +39,46 @@ export const authOptions: NextAuthOptions = {
         },
       },
       authorize: async (credentials) => {
-        console.log(credentials);
-        // const creds = await signInSchema.parseAsync(credentials);
-        // const client = new ApolloClient({
-        //   uri: process.env.API_URL ?? "",
-        //   cache: new InMemoryCache(),
-        // });
-        // const variables: MutationLoginArgs = {
-        //   email: creds.email,
-        //   password: creds.password,
-        // };
-        // const response = await client.mutate<Mutation>({
-        //   mutation: LOGIN_MUTATION,
-        //   variables,
-        //   context: {
-        //     shouldTrackStatus: false,
-        //   },
-        // });
+        const creds = await signInSchema.parseAsync(credentials);
+        const client = new ApolloClient({
+          uri: process.env.API_URL ?? "",
+          cache: new InMemoryCache(),
+        });
+        const variables: MutationLoginArgs = {
+          loginInput: {
+            email: creds.email,
+            password: creds.password,
+          },
+        };
+        const response = await client.mutate<Mutation>({
+          mutation: LOGIN_MUTATION,
+          variables,
+          context: {
+            shouldTrackStatus: false,
+          },
+        });
 
-        // if (response.errors) {
-        //   throw new Error(response.errors[0].message);
-        // }
+        if (response.errors) {
+          throw new Error(response.errors[0].message);
+        }
 
-        // if (!response.data?.login?.token) throw new Error("No token");
+        if (!response.data?.login?.token) throw new Error("No token");
 
-        // const decodedToken = jwt.decode(response.data?.login?.token);
+        const decodedToken = jwt.decode(response.data?.login?.token);
 
-        // if (!decodedToken) {
-        //   throw new Error("Invalid user");
-        // }
+        if (!decodedToken) {
+          throw new Error("Invalid user");
+        }
 
-        // const userObject = { token: response.data?.login?.token };
+        const userObject = { token: response.data?.login?.token };
 
-        return {} as User;
+        return userObject as User;
       },
     }),
   ],
   callbacks: {
-    async signIn({ account, user }) {
-      if (!account) return false;
-      if (account.provider === "google") {
-        console.log(user);
-        //     const client = new ApolloClient({
-        //    uri: process.env.API_URL ?? "",
-        //    cache: new InMemoryCache(),
-        //  });
-        //  // Adapt this to whatever your mutation needs are for registering a Google user.
-        //  const variables: MutationGoogleOAuthArgs = {
-        //    idToken: account.id_token as string,
-        //  };
-        //  const response = await client.mutate<Mutation>({
-        //    mutation: GOOGLE_AUTH_MUTATION,
-        //    variables,
-        //    context: {
-        //      shouldTrackStatus: false,
-        //    },
-        //  });
-        //
-        //  if (response.errors) {
-        //    throw new Error(response.errors[0].message);
-        //  }
-        //
-        //  if (!response.data?.googleOAuth?.token) throw new Error("No token");
-        //
-        //  const decodedToken = jwt.decode(response.data.googleOAuth.token);
-        //
-        //  if (!decodedToken) {
-        //    throw new Error("Invalid user");
-        //  }
-        //  user.token = response.data?.googleOAuth.token;
-        //
-        //  return true;
-        // }
-      }
-      return true;
-    },
-
     async redirect({ baseUrl, url }) {
-      // Allows relative callback URLs
       if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin
       if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },

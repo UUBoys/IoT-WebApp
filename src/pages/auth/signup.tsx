@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-unresolved */
 
 "use client";
@@ -10,15 +12,16 @@ import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { Mutation } from "react-query";
 
-import { Mutation, MutationRegisterArgs } from "@/generated/graphql";
+import { MutationRegisterArgs } from "@/generated/graphql";
 import { REGISTER_MUTATION } from "@/modules/GRAPHQL/mutations/RegisterMutation";
 import { IRegister, signUpSchema } from "@/modules/utils/schemas/auth";
 
 const SignUp: React.FC = () => {
   const {
-    register,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm<IRegister>({
     resolver: zodResolver(signUpSchema),
@@ -26,10 +29,10 @@ const SignUp: React.FC = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const { data: session } = useSession();
+
   const [mutateRegisterAsync] = useMutation<Mutation>(REGISTER_MUTATION, {
     context: { shouldTrackStatus: true, withConfirmation: true },
   });
-
   const [defaultError, setDefaultError] = useState<string>("");
 
   const handleSignUp = async ({
@@ -38,15 +41,18 @@ const SignUp: React.FC = () => {
     password,
     passwordCheck,
   }: IRegister) => {
+    console.log(username, email, password, passwordCheck);
     if (password !== passwordCheck) {
       setDefaultError("Passwords do not match");
       return;
     }
 
     const variables: MutationRegisterArgs = {
-      email,
-      password,
-      username,
+      registerInput: {
+        name: username,
+        email,
+        password,
+      },
     };
 
     const res = await mutateRegisterAsync({
@@ -54,7 +60,7 @@ const SignUp: React.FC = () => {
     });
 
     setDefaultError("");
-    if (!res.data?.register) {
+    if (res.errors?.length && res.errors?.length > 0) {
       setDefaultError(res.errors?.[0].message ?? "");
     } else {
       await signIn("credentials", { email, password, redirect: false });
@@ -68,114 +74,130 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="flex h-screen w-full items-center bg-gray-100">
-      <div className="mx-auto flex h-[500px] w-11/12  flex-col rounded-md bg-white  p-10 shadow-2xl sm:w-[400px]">
-        <div className="relative top-[-130px] mx-auto flex h-[170px] w-[170px] items-center justify-center rounded-full border-[10px] border-gray-200 bg-white">
-          <div className="  text-center text-6xl font-bold text-primary-500">
-            Q
+      <section className="w-full bg-gray-700 bg-opacity-60 bg-[url('/images/register-wallpaper.jpeg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
+        <div className="pt:mt-0 mx-auto flex w-full flex-col items-center justify-center px-6 py-8 md:h-screen">
+          <a
+            href="#"
+            className="mb-4 inline-flex items-center text-xl font-semibold text-white"
+          >
+            <img className="mr-2 h-14" src="/images/logo.png" alt="logo" />
+            PotFriend
+          </a>
+          <div className="w-full rounded-lg !bg-gray-800 shadow sm:max-w-md md:mt-0 xl:p-0">
+            <div className="space-y-4 p-6 sm:p-8 md:space-y-6 lg:space-y-8">
+              <h2 className="text-center text-xl font-bold leading-tight tracking-tight !text-white md:text-2xl">
+                {t("pages.auth.register.header")}
+              </h2>
+              <form
+                className="space-y-4 md:space-y-6"
+                onSubmit={handleSubmit(handleSignUp)}
+                action=""
+              >
+                <div>
+                  {" "}
+                  {errors.username && (
+                    <p className="mt-2 text-xs italic text-red-500">
+                      {errors.username?.message}
+                    </p>
+                  )}
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-sm font-medium !text-white"
+                  >
+                    Jméno
+                  </label>
+                  <input
+                    type="text"
+                    {...register("username")}
+                    id="name"
+                    className="!placeholder:text-gray-400 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                    placeholder="Jméno"
+                  />
+                </div>
+                <div>
+                  {" "}
+                  {errors.email && (
+                    <p className="mt-2 text-xs italic text-red-500">
+                      {errors.email?.message}
+                    </p>
+                  )}
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-medium !text-white"
+                  >
+                    Your email
+                  </label>
+                  <input
+                    type="email"
+                    {...register("email")}
+                    id="email"
+                    className="!placeholder:text-gray-400 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                    placeholder="name@company.com"
+                  />
+                </div>
+                <div>
+                  {errors.password && (
+                    <p className="mt-2 text-xs italic text-red-500">
+                      {errors.password?.message}
+                    </p>
+                  )}
+                  <label
+                    htmlFor="password"
+                    className="mb-2 block text-sm font-medium !text-white"
+                  >
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    {...register("password")}
+                    id="password"
+                    placeholder="••••••••"
+                    className="!placeholder:text-gray-400 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="confirm-password"
+                    className="mb-2 block text-sm font-medium !text-white"
+                  >
+                    Confirm password
+                  </label>
+                  <input
+                    type="password"
+                    {...register("passwordCheck")}
+                    id="confirm-password"
+                    placeholder="••••••••"
+                    className="!placeholder:text-gray-400 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                  />
+                </div>
+                {defaultError !== "" && (
+                  <p className="mt-2 text-xl italic text-red-500">
+                    {defaultError}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  onClick={() => {
+                    console.log("clicked");
+                  }}
+                  className="!hover:bg-primary-700 !focus:ring-primary-800 w-full rounded-lg !bg-primary-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300"
+                >
+                  Vytvořit účet
+                </button>
+                <p className="text-center text-sm font-light !text-gray-300">
+                  <Link
+                    href="/auth/signin"
+                    className="font-medium !text-primary-500 hover:underline"
+                  >
+                    Již máte účet?
+                  </Link>
+                </p>
+              </form>
+            </div>
           </div>
         </div>
-
-        <div className="w-full ">
-          {" "}
-          {defaultError !== "" && (
-            <p className="mt-2 text-xl italic text-red-500">{defaultError}</p>
-          )}
-          <form action="" onSubmit={handleSubmit(handleSignUp)}>
-            <div className="mb-6">
-              {errors.username && (
-                <p className="mt-2 text-xs italic text-red-500">
-                  {errors.username?.message}
-                </p>
-              )}
-              <label
-                htmlFor="name"
-                className="mb-2 block text-sm font-medium  text-gray-900 dark:text-white"
-              >
-                <input
-                  {...register("username")}
-                  type="name"
-                  id="name"
-                  className="block w-full rounded-lg border !border-primary-100 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-lg placeholder:text-gray-400 focus:border-2  focus:ring-primary-500 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                  placeholder={t("pages.auth.form.name.placeholder")}
-                  required
-                />
-              </label>
-            </div>
-            <div className="mb-6">
-              {errors.email && (
-                <p className="mt-2 text-xs italic text-red-500">
-                  {errors.email?.message}
-                </p>
-              )}
-              <label
-                htmlFor="email"
-                className="mb-2 block text-sm font-medium  text-gray-900 dark:text-white"
-              >
-                <input
-                  {...register("email")}
-                  type="email"
-                  id="email"
-                  className="block w-full rounded-lg border !border-primary-100 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-lg placeholder:text-gray-400 focus:border-2  focus:ring-primary-500 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                  placeholder={t("pages.auth.form.email.placeholder")}
-                  required
-                />
-              </label>
-            </div>
-            <div className="mb-6">
-              {errors.password && (
-                <p className="mt-2 text-xs italic text-red-500">
-                  {errors.password?.message}
-                </p>
-              )}
-              <label
-                htmlFor="password"
-                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-              >
-                <input
-                  {...register("password")}
-                  type="password"
-                  id="password"
-                  className="block w-full rounded-lg border !border-primary-100 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-lg placeholder:text-gray-400 focus:border-primary-500 focus:ring-primary-500  dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                  required
-                  placeholder={t("pages.auth.form.password.placeholder")}
-                />
-              </label>
-            </div>
-            <div className="mb-6">
-              {errors.passwordCheck && (
-                <p className="mt-2 text-xs italic text-red-500">
-                  {errors.passwordCheck?.message}
-                </p>
-              )}
-              <label
-                htmlFor="passwordCheck"
-                className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-              >
-                <input
-                  {...register("passwordCheck")}
-                  type="password"
-                  id="passwordCheck"
-                  className="block w-full rounded-lg border !border-primary-100 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-lg placeholder:text-gray-400 focus:border-primary-500 focus:ring-primary-500  dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                  required
-                  placeholder={t("pages.auth.form.password.passwordRepeat")}
-                />
-              </label>
-            </div>
-            <button
-              type="submit"
-              className="w-full rounded-lg bg-primary-500 px-5 py-2.5 text-center text-sm font-medium text-white transition-all hover:bg-secondary-900 focus:outline-none focus:ring-4  "
-            >
-              {t("pages.auth.register.button")}
-            </button>
-          </form>
-          <Link
-            href="/auth/signin"
-            className="mt-3 block text-center text-sm font-light text-gray-600 dark:text-white"
-          >
-            {t("pages.auth.register.login")}
-          </Link>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };
