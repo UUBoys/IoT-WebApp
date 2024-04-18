@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Lottie from "lottie-react";
 
-import qUpLoaderAnimation from "../../../../../public/animations/qup-loader-animation.json";
+import qUpLoaderAnimation from "../../../../../public/animations/loader-animation.json";
 import qUpLoaderFailedAnimation from "../../../../../public/animations/qup-loader-fail-animation.json";
 import qUpLoaderSuccessAnimation from "../../../../../public/animations/qup-loader-success-animation.json";
 
