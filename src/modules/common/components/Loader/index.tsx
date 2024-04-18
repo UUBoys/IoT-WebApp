@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 
 import qUpLoaderAnimation from "../../../../../public/animations/loader-animation.json";
@@ -7,6 +7,10 @@ import qUpLoaderFailedAnimation from "../../../../../public/animations/qup-loade
 import qUpLoaderSuccessAnimation from "../../../../../public/animations/qup-loader-success-animation.json";
 
 import { LoadingType } from "@/modules/helpers/loader-helpers";
+
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
 
 type LoaderProps = {
   children?: React.ReactNode;
@@ -41,7 +45,8 @@ const Loader: React.FC<LoaderProps> = ({
             <Lottie
               animationData={qUpLoaderAnimation}
               loop
-              className="w-1/4  "
+              className="w-1/4 
+               "
             />{" "}
             <div className="mt-[-70px] bg-gradient-to-b from-[#ff8b56] to-[#fe592b] !bg-clip-text text-[20px] font-bold text-transparent md:text-[60px]">
               Načítání...
