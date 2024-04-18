@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="flex h-screen w-full items-center bg-gray-100">
-      <section className="w-full bg-gray-700 bg-opacity-60 bg-[url('/images/register-wallpaper.jpeg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
+      <section className="w-full bg-gray-700 bg-opacity-60 bg-[url('/images/register-wallpaper.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
         <div className="pt:mt-0 mx-auto flex w-full flex-col items-center justify-center px-6 py-8 md:h-screen">
           <a
             href="#"

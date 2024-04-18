@@ -98,7 +98,7 @@ const AddNewDeviceModal: React.FC<IAddNewDeviceModalProps> = ({
                 color="danger"
                 className="w-20"
               >
-                Uložit
+                Zrušit
               </Button>
             </div>
           </div>

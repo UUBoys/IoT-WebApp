@@ -1,10 +1,5 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-
 "use client";
 
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import { NextPage } from "next";
 import React from "react";
 
@@ -23,7 +18,7 @@ const Home: NextPage = () => {
               id: "1",
               name: "Philips Hue",
               description: "RGB LED Strip",
-              image: "https://picsum.photos/200/300",
+              image: "",
             },
           ],
         }}
