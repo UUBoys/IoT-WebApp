@@ -10,15 +10,15 @@ import Button from "../Button";
 import DeviceCard from "../DeviceCard";
 
 import { uuid } from "@/modules/helpers/general";
-import { ISpace } from "@/modules/utils/schemas/space";
+import { IRoom } from "@/modules/utils/schemas/room";
 
-interface ISpaceWithDevicesProps {
-  space: ISpace;
+interface IRoomWithPlantsProps {
+  room: IRoom;
   className?: string;
 }
 
-const SpaceWithDevices: React.FC<ISpaceWithDevicesProps> = ({
-  space: { devices, name },
+const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
+  room: { plants: devices, name },
   className = "",
 }) => {
   const [defaultError, setDefaultError] = useState("");
@@ -70,4 +70,4 @@ const SpaceWithDevices: React.FC<ISpaceWithDevicesProps> = ({
   );
 };
 
-export default SpaceWithDevices;
+export default RoomWithPlants;

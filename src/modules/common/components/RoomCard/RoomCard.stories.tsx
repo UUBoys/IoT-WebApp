@@ -17,30 +17,102 @@ export const Default: Story = {
     room: {
       id: uuid(),
       name: "Obývák",
-      devices: [
+      plants: [
         {
           id: "1",
           name: "Philips Hue",
           description: "RGB LED Strip",
           image: "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
+          mesurements: [
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+          ],
+          type: "RGB",
         },
         {
           id: "2",
           name: "Philips Hue",
           description: "RGB LED Strip",
           image: "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
+          mesurements: [
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+          ],
+          type: "RGB",
         },
         {
           id: "3",
           name: "Philips Hue",
           description: "RGB LED Strip",
           image: "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
+          mesurements: [
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+          ],
+          type: "RGB",
         },
         {
           id: "4",
           name: "Philips Hue",
           description: "RGB LED Strip",
           image: "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
+          mesurements: [
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+            {
+              id: uuid(),
+              value: 25,
+              date: new Date(),
+            },
+          ],
+          type: "RGB",
         },
       ],
     },

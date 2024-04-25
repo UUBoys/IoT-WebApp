@@ -9,7 +9,7 @@ interface IRoomCardProps {
 }
 
 const RoomCard: React.FC<IRoomCardProps> = ({
-  room: { id, name, devices },
+  room: { id, name, plants },
   className = "",
 }) => {
   const cln = clsx("rounded-lg bg-gray-700", className);
@@ -18,7 +18,7 @@ const RoomCard: React.FC<IRoomCardProps> = ({
     <div className={cln}>
       <div className="p-4">
         <h3 className="text-xl font-semibold">{name}</h3>
-        <p className="text-sm py-1 text-gray-500">{devices.length} Devices</p>
+        <p className="text-sm py-1 text-gray-500">{plants.length} Kytiček</p>
         <Link href={`/room/${id}`}> Detail </Link>
       </div>
     </div>

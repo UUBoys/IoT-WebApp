@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 import {
   ApolloClient,
   ApolloLink,
@@ -104,7 +103,7 @@ const authLink = setContext(async (_, { headers }) => {
   return {
     headers: {
       ...headers,
-      ...(token && { authorization: token ?? "" }),
+      ...(token && { authorization: `Bearer ${token}` ?? "" }),
     },
   };
 });

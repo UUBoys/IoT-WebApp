@@ -1,10 +1,13 @@
 import { z } from "zod";
+import { mesurementSchema } from "./mesurement";
 
-export const deviceSchema = z.object({
+export const plantSchema = z.object({
   id: z.string(),
   image: z.string(),
   name: z.string(),
   description: z.string(),
+  type: z.string(),
+  mesurements: z.array(mesurementSchema),
 });
 
-export type IDevice = z.infer<typeof deviceSchema>;
+export type IPlant = z.infer<typeof plantSchema>;

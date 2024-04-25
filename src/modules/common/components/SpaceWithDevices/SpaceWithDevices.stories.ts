@@ -1,23 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import SpaceWithDevices from ".";
+import RoomWithPlants from ".";
 
 import { uuid } from "@/modules/helpers/general";
 
-const meta: Meta<typeof SpaceWithDevices> = {
-  component: SpaceWithDevices,
+const meta: Meta<typeof RoomWithPlants> = {
+  component: RoomWithPlants,
   title: "Components/SpaceWithDevices",
 };
 
 export default meta;
-type Story = StoryObj<typeof SpaceWithDevices>;
+type Story = StoryObj<typeof RoomWithPlants>;
 
 export const Default: Story = {
   args: {
-    space: {
+    room: {
       id: uuid(),
       name: "Obývák",
-      devices: [
+      plants: [
         {
           id: "1",
           name: "Philips Hue",

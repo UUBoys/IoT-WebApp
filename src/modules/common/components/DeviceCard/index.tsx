@@ -3,11 +3,11 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-import { IDevice } from "@/modules/utils/schemas/device";
+import { IPlant } from "@/modules/utils/schemas/device";
 import Badge from "../Bagde";
 
 interface IDeviceCardProps {
-  device: IDevice;
+  device: IPlant;
   className?: string;
 }
 
