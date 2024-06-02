@@ -22,6 +22,7 @@ const nextConfig = {
       "katalog.svkul.cz",
       "obalkyknih.cz",
       "nazornavyuka.cz",
+      "g.denik.cz",
       "ftp.nazornavyuka.cz",
       "uuapp.plus4u.net",
       "s3.amazonaws.com",

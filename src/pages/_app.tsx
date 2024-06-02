@@ -21,6 +21,9 @@ import client from "@/modules/lib/apolloClient";
 
 moment.locale(i18n.language === "en" ? "en-gb" : "cs");
 
+import { Chart, ArcElement } from "chart.js";
+Chart.register(ArcElement);
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

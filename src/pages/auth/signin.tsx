@@ -4,13 +4,16 @@
 
 "use client";
 
-import Lottie from "lottie-react";
+// import Lottie from "lottie-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+
+const Lottie = lazy(() => import('lottie-react'));
+
 
 import qUpLoaderAnimation from "../../../public/animations/loader-animation.json";
 

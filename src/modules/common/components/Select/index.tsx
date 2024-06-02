@@ -17,6 +17,7 @@ type SelectProps = {
   defaultSelected?: SelectItemProps | undefined;
   onSelectedChange?: (item: SelectItemProps) => void;
   className?: string;
+  label?: string;
 };
 
 const Select: React.FC<SelectProps> = ({
@@ -24,6 +25,7 @@ const Select: React.FC<SelectProps> = ({
   defaultSelected,
   onSelectedChange,
   className,
+  label,
 }) => {
   const { t } = useTranslation();
   const [selected, setSelected] = useState(defaultSelected || undefined);
@@ -38,6 +40,7 @@ const Select: React.FC<SelectProps> = ({
     <div className={className || ""}>
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
+          {label && <p className={"mb-1"}>{label}</p>}
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-[#FFAD32] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             {selected ? (
               <span className="block truncate text-black">

@@ -10,7 +10,7 @@ import { useModalStore } from "@/modules/common/stores/modal-store";
 import CreateNewRoomModal, {
   ICreateNewRoomValues,
 } from "@/modules/common/modals/CreateNewRoomModal";
-import { useCreateRoom } from "@/modules/common/hooks/MutationHooks/useCreateRoom";
+// import { useCreateRoom } from "@/modules/common/hooks/MutationHooks/useCreateRoom";
 import { useRooms } from "@/modules/common/hooks/QueryHooks/useRooms";
 
 const Home: NextPage = () => {
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   }));
   const [defaultError, setDefaultError] = useState("");
 
-  const { createRoomAsync } = useCreateRoom();
+  // const { createRoomAsync } = useCreateRoom();
   const { rooms, refetchRooms } = useRooms();
 
   const createNewRoom = async (deviceValues: ICreateNewRoomValues) => {
