@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31043ecd-d487-4276-9447-4b31e6695263" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/device/[id]/detail.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/device/[id]/settings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/common/components/Select/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/components/Select/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/signin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/signin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/device/[id]/detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/device/[id]/detail.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +43,7 @@
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/Users/dannyseiner/Projects/Unicorn/IoT-WebApp/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -70,7 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1717334326687</updated>
       <workItem from="1717334327740" duration="967000" />
-      <workItem from="1717335439400" duration="6353000" />
+      <workItem from="1717335439400" duration="9891000" />
     </task>
     <servers />
   </component>

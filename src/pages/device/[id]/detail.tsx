@@ -100,7 +100,7 @@ const DeviceDetail = () => {
 
   return (
     <div className={"px-6 mt-10 flex flex-col gap-10"}>
-      <div className={"grid grid-cols-3 gap-10"}>
+      <div className={"grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-10"}>
         <div
           className={
             "h-full w-full flex flex-col gap-10 rounded-md justify-center"
@@ -133,7 +133,7 @@ const DeviceDetail = () => {
           </div>
           <div
             className={
-              "h-[100px] w-full bg-gray-800 flex flex-col gap-3 p-4 rounded-md justify-center"
+              "h-[200px] w-full bg-gray-800 flex flex-col gap-3 p-4 rounded-md justify-center"
             }
           >
             <div className={"flex flex-row gap-5 w-full"}>
@@ -158,6 +158,13 @@ const DeviceDetail = () => {
               >
                 Turn off
               </div>
+            </div>
+            <div
+              className={
+                "px-3 py-2 bg-gray-500 rounded-md mt-2 cursor-pointer text-center "
+              }
+            >
+              Settings
             </div>
           </div>
         </div>
