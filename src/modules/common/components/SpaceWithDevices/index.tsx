@@ -126,7 +126,10 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
         duration={2000}
       />
       <div
-        onClick={() => push(`/room/${id}`)}
+        onClick={(e) => {
+          e.preventDefault();
+          push(`/room/${id}`);
+        }}
         className="flex w-full flex-col  h-full flex-1 gap-2"
       >
         <div
