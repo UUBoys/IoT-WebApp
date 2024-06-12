@@ -67,7 +67,7 @@ const RoomDetail = () => {
         </div>
         <div
           className={
-            "w-full border-b border-background-100 flex justify-between items-center flex-row gap-4 bg-white hover:shadow-2xl shadow-lg transition-all hover:scale-[1.01] rounded-md"
+            "w-full  border-background-100 flex justify-between items-center flex-row gap-4 bg-white hover:shadow-2xl shadow-lg transition-all hover:scale-[1.01] rounded-md"
           }
         >
           <Image
