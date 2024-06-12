@@ -75,7 +75,9 @@ const Home: NextPage = () => {
       </div>
       {rooms.length === 0 && (
         <div className="flex w-full justify-center items-center h-[80vh]">
-          <h1 className="text-4xl text-gray-100">Nemáte žádné místnosti😔💔</h1>
+          <h1 className="text-4xl text-common-500">
+            Nemáte žádné místnosti😔💔
+          </h1>
         </div>
       )}
     </div>
