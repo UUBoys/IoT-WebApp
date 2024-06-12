@@ -11,6 +11,7 @@ import { getSession } from "next-auth/react";
 import { useApolloStatusStore } from "../common/stores/apollo-store";
 import { uuid } from "../helpers/general";
 import { LoadingType } from "../helpers/loader-helpers";
+import { from } from "@apollo/client";
 
 const httpLink = createHttpLink({
   uri: "/api/",
@@ -108,10 +109,10 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-const combinedLink = authLink.concat(statusLink);
+const links = from([authLink, statusLink, httpLink]);
 
 const client = new ApolloClient({
-  link: combinedLink.concat(httpLink),
+  link: links,
   cache: new InMemoryCache(),
 });
 

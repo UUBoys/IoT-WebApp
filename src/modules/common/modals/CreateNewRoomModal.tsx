@@ -42,7 +42,7 @@ const CreateNewRoomModal: React.FC<ICreateNewRoomModalProps> = ({
                 type="text"
                 id="name"
                 {...register("name")}
-                placeholder="Název zařízení"
+                placeholder="Název místnosti"
                 className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
               />
             </div>
