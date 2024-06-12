@@ -26,10 +26,13 @@ interface IRoomWithPlantsProps {
 }
 const loadingStates = [
   {
-    text: "Navazuji spojení s rostlinou",
+    text: "Vytvářím virtuální rostlinu",
   },
   {
-    text: "Připojuji zařízení k síti",
+    text: "Navazuji spojení s reálnou rostlinou",
+  },
+  {
+    text: "Připojuji zařízení k systému",
   },
   {
     text: "Probíhá synchronizace dat",
@@ -38,13 +41,10 @@ const loadingStates = [
     text: "Kontroluji stav připojení",
   },
   {
-    text: "Zajišťuji stabilní spojení",
-  },
-  {
     text: "Probíhá inicializace systému",
   },
   {
-    text: "Hledám dostupné sítě",
+    text: "Přidávám rostlinu do místnosti",
   },
   {
     text: "Připravuji zařízení k provozu",
@@ -72,8 +72,9 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
     setPairingCode,
     error,
     loading: isPairedLoading,
-  } = useCheckPairingProccess((plantId) => {
-    addPlantsToRoomAsync(id, [plantId]);
+  } = useCheckPairingProccess(async (plantId) => {
+    await addPlantsToRoomAsync(id, [plantId]);
+    refetchRooms && refetchRooms();
   });
 
   useEffect(() => {
@@ -117,7 +118,8 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
     <div
       className={clsx(
         className,
-        " h-full w-full p-4 bg-white rounded-lg hover:shadow-2xl hover:scale-[1.01] transition-all cursor-pointer shadow-lg"
+        !isPairedLoading && "hover:shadow-2xl hover:scale-[1.01]",
+        " h-full w-full p-4 bg-white rounded-lg  transition-all cursor-pointer shadow-lg"
       )}
     >
       <MultiStepLoader
