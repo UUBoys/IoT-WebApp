@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31043ecd-d487-4276-9447-4b31e6695263" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/common/components/NavBar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/components/NavBar/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/common/components/SpaceWithDevices/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/components/SpaceWithDevices/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/common/hooks/QueryHooks/useRooms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/hooks/QueryHooks/useRooms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/signin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/signin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/room/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/room/[id].tsx" afterDir="false" />
-    </list>
+    <list default="true" id="31043ecd-d487-4276-9447-4b31e6695263" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
