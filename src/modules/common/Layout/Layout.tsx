@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 import { useMemo } from "react";
 
 import Loader from "../components/Loader";
-import Navbar from "../components/Navbar";
 import { useApolloStatusStore } from "../stores/apollo-store";
 
 import LayoutContext from "./LyoutContext";
 
 import { isInRestrictedPath } from "@/modules/helpers/general";
 import { LoadingType } from "@/modules/helpers/loader-helpers";
+import Navbar from "@/modules/common/components/NavBar";
 
 interface LayoutProps {
   children: React.ReactNode;
