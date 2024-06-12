@@ -8,6 +8,7 @@ export const plantSchema = z.object({
   description: z.string(),
   type: z.string(),
   mesurements: z.array(mesurementSchema),
+  measurements: z.array(mesurementSchema),
 });
 
 export type IPlant = z.infer<typeof plantSchema>;

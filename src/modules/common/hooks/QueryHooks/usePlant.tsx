@@ -10,7 +10,9 @@ interface IUsePlantHook {
   refetchPlant: () => void;
 }
 
-export const usePlant = (plantId: string | number): IUsePlantHook => {
+export const usePlant = (
+  plantId: string | string[] | undefined
+): IUsePlantHook => {
   const [plant, setPlant] = useState<IPlant | null>(null);
 
   const { refetch } = useQuery<Query>(GET_PLANT, {

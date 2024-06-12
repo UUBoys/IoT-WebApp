@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="31043ecd-d487-4276-9447-4b31e6695263" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/common/hooks/MutationHooks/useUpdateRoom.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/common/hooks/QueryHooks/usePlant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/hooks/QueryHooks/usePlant.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/common/hooks/QueryHooks/useRooms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/hooks/QueryHooks/useRooms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/room/[roomId]/plant/[deviceId]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/room/[roomId]/plant/[deviceId]/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +89,7 @@
       <updated>1717334326687</updated>
       <workItem from="1717334327740" duration="967000" />
       <workItem from="1717335439400" duration="9891000" />
-      <workItem from="1718195734255" duration="4970000" />
+      <workItem from="1718195734255" duration="5597000" />
     </task>
     <servers />
   </component>
