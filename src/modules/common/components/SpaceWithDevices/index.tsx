@@ -123,7 +123,9 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
       />
       <div className="flex w-full flex-col  h-full flex-1 gap-2">
         <div
-          className={"flex-1 w-full flex flex-row justify-between items-center"}
+          className={
+            "flex-1 w-full flex flex-row justify-between items-center gap-2"
+          }
         >
           <h1
             className="text-xl text-black font-bold cursor-pointer"
@@ -139,24 +141,7 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
         <p className={"text-sm text-gray-400"}>
           Počet zařízení <span className={"font-bold"}>{devices.length}</span>
         </p>
-
-        {/*<Button*/}
-        {/*  color="primary"*/}
-        {/*  className="!h-10 bg-gray-700 !px-3 text-sm w-fit mt-3"*/}
-        {/*  size="md"*/}
-        {/*  onClick={openEditAppModal}*/}
-        {/*>*/}
-        {/*  <div className="flex items-center !gap-2 ">*/}
-        {/*    <AddCircleOutlineIcon className="h-5 w-5" />*/}
-        {/*    Přidat zařízení*/}
-        {/*  </div>*/}
-        {/*</Button>*/}
       </div>
-      {/*<div className="flex flex-wrap gap-10 pt-4">*/}
-      {/*  {devices.map((device) => (*/}
-      {/*    <DeviceCard key={uuid()} className="min-w-[350px]" device={device} />*/}
-      {/*  ))}*/}
-      {/*</div>*/}
     </div>
   );
 };

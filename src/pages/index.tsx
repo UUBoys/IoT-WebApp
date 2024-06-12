@@ -47,7 +47,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full sm:p-10">
+    <div className="min-h-screen w-full p-4 sm:p-10">
       <div className="flex w-full justify-end">
         <Button
           className=" !h-12 !bg-success-600 !px-3 text-lg "
