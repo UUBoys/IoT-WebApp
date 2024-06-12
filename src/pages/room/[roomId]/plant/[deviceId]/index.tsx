@@ -58,7 +58,7 @@ const DeviceDetail = () => {
   };
 
   const options = {
-    rotation: -90,
+    rotation: 0,
     cutout: "80%",
     plugins: {
       legend: {
@@ -129,7 +129,13 @@ const DeviceDetail = () => {
             }
           >
             <div className={"flex flex-row justify-between items-center"}>
-              <h1 className={"font-bold text-xl text-black"}>{plant.name}</h1>
+              <div>
+                <h1 className={"font-bold text-xl text-black"}>{plant.name}</h1>
+                <p className={"text-sm font-medium text-gray-300"}>
+                  Typ: <span className={"font-bold"}>{plant?.type}</span>
+                </p>
+              </div>
+
               <div className={"flex flex-row gap-3 items-center"}>
                 {plant.isOnline ? (
                   <div className={"bg-success-500 px-3 py-2 rounded-md"}>
@@ -141,11 +147,13 @@ const DeviceDetail = () => {
                   </div>
                 )}
                 <SettingsIcon
+                  className={"text-gray-300"}
                   onClick={() => push(`/device/${query.id}/settings`)}
                 />
               </div>
             </div>
-            <p className={"text-sm font-medium text-gray-300"}>
+
+            <p className={"text-sm font-medium text-gray-300 line-clamp-4"}>
               {plant.description}
             </p>
           </div>
@@ -154,36 +162,7 @@ const DeviceDetail = () => {
               "h-[200px] w-full bg-white flex flex-col gap-3 p-4 rounded-md justify-center shadow-xl"
             }
           >
-            <div className={"flex flex-row gap-5 w-full"}>
-              <div
-                className={
-                  "px-3 py-2 bg-lime-500 rounded-md flex-1 cursor-pointer"
-                }
-              >
-                Water
-              </div>
-              <div
-                className={
-                  "px-3 py-2 bg-gray-500 rounded-md flex-1 cursor-pointer"
-                }
-              >
-                Schedule
-              </div>
-              <div
-                className={
-                  "px-3 py-2 bg-red-500 rounded-md flex-1 cursor-pointer"
-                }
-              >
-                Turn off
-              </div>
-            </div>
-            <div
-              className={
-                "px-3 py-2 bg-gray-500 rounded-md mt-2 cursor-pointer text-center "
-              }
-            >
-              Settings
-            </div>
+            <p>Naposledy </p>
           </div>
         </div>
         <div
