@@ -46,7 +46,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div
           className={clsx(
             !isInRestrictedPath(pathname) && "pt-[64px] sm:pl-[64px]",
-            "grow"
+            "grow bg-background-50"
           )}
         >
           {children}

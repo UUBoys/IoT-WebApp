@@ -25,7 +25,7 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
   refetchRooms,
   className = "",
 }) => {
-  console.log("RoomWithPlants", devices);
+  // console.log("RoomWithPlants", devices);
   const [defaultError, setDefaultError] = useState("");
   const { openModal, closeModal } = useModalStore((s) => ({
     openModal: s.openModal,
@@ -59,22 +59,27 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
   };
 
   return (
-    <div className={clsx(className, " h-full w-full pt-10")}>
-      <div className="flex w-full justify-between">
-        <h1 className="text-4xl text-black">{name}</h1>
+    <div
+      className={clsx(
+        className,
+        " h-full w-full py-2 px-4 bg-white rounded-lg shadow-xl"
+      )}
+    >
+      <div className="flex w-full flex-col justify-between h-full flex-1">
+        <h1 className="text-3xl text-black font-bold">{name}</h1>
         <Button
           color="primary"
-          className=" !h-12 bg-gray-700 !px-3 text-lg "
+          className="!h-10 bg-gray-700 !px-3 text-sm w-fit"
           size="md"
           onClick={openEditAppModal}
         >
-          <div className="flex items-center justify-between !gap-2 ">
+          <div className="flex items-center !gap-2 ">
             <AddCircleOutlineIcon className="h-5 w-5" />
-            Přidat zařízení do prostoru
+            Přidat zařízení
           </div>
         </Button>
       </div>
-      <div className="flex flex-wrap gap-10 pt-10">
+      <div className="flex flex-wrap gap-10 pt-4">
         {devices.map((device) => (
           <DeviceCard key={uuid()} className="min-w-[350px]" device={device} />
         ))}

@@ -24,20 +24,19 @@ const AddNewDeviceModal: React.FC<IAddNewDeviceModalProps> = ({
 
   return (
     <div className="flex w-full flex-col items-center gap-32  align-top">
-      <div className="flex  w-full flex-col items-start rounded-lg bg-gray-700 text-center  shadow-xl">
+      <div className="flex  w-full flex-col items-start rounded-lg bg-white text-center  shadow-xl">
         <form
           onSubmit={handleSubmit(addNewDevice)}
-          className="flex w-full flex-col gap-5 p-10 pb-20"
+          className="flex w-full flex-col gap-5 p-10"
         >
-          <h1 className="text-3xl font-bold text-white">
+          <h1 className="text-3xl font-bold text-black">
             Přidat nové zařízení
           </h1>
           <div className="space-y-4 text-start md:space-y-6">
-            {" "}
             <div>
               <label
                 htmlFor="name"
-                className="mb-2 block text-sm font-medium !text-white"
+                className="mb-2 block text-sm font-medium !text-gray-300"
               >
                 Název
               </label>
@@ -46,13 +45,13 @@ const AddNewDeviceModal: React.FC<IAddNewDeviceModalProps> = ({
                 id="name"
                 {...register("name")}
                 placeholder="Název zařízení"
-                className="!focus:ring-blue-500 !focus:border-blue-500 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white !placeholder-gray-400 focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
               />
             </div>
             <div>
               <label
                 htmlFor="description"
-                className="mb-2 block text-sm font-medium !text-white"
+                className="mb-2 block text-sm font-medium !text-gray-300"
               >
                 Popis zařízení
               </label>
@@ -61,13 +60,13 @@ const AddNewDeviceModal: React.FC<IAddNewDeviceModalProps> = ({
                 rows={5}
                 {...register("description")}
                 placeholder="Popis zařízení"
-                className="!focus:ring-blue-500 !focus:border-blue-500 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white !placeholder-gray-400 focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
               />
             </div>
             <div>
               <label
                 htmlFor="deviceId"
-                className="mb-2 block text-sm font-medium !text-white"
+                className="mb-2 block text-sm font-medium !text-gray-300"
               >
                 Unikátní Kód
               </label>
@@ -76,7 +75,7 @@ const AddNewDeviceModal: React.FC<IAddNewDeviceModalProps> = ({
                 id="deviceId"
                 {...register("deviceId")}
                 placeholder="Unikátní kód zařízení"
-                className="!focus:ring-blue-500 !focus:border-blue-500 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white !placeholder-gray-400 focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
               />
             </div>
             {defaultError !== "" && (
@@ -84,7 +83,7 @@ const AddNewDeviceModal: React.FC<IAddNewDeviceModalProps> = ({
             )}
           </div>
 
-          <div className="flex w-full items-center justify-center gap-6">
+          <div className="flex w-full items-center justify-end gap-6 mt-[30px]">
             <div className="flex gap-5 text-end">
               <Button type="submit" size="lg" className="w-20">
                 Uložit

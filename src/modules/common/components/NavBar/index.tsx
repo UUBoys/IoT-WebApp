@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className="max-h-25 fixed left-0 top-0 z-50 flex w-full items-center  justify-start border-b !border-gray-700 !bg-gray-800">
+      <nav className="max-h-25 fixed left-0 top-0 z-50 flex w-full items-center  justify-start border-b !border-background-100 shadow-2xl !bg-white">
         <div className="p-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
                 aria-controls="logo-sidebar"
                 type="button"
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                className="!focus:ring-gray-600 ocus:outline-none inline-flex items-center rounded-lg p-2 text-sm !text-white hover:!bg-gray-700  "
+                className="!focus:ring-gray-600 ocus:outline-none inline-flex items-center rounded-lg p-2 text-sm !text-primary-500 hover:!bg-secondary-200"
               >
                 <span className="sr-only">Open sidebar</span>
                 <svg
@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
                 className="ml-5 inline-flex items-center text-xl font-semibold text-white"
               >
                 <img className="mr-2 h-10" src="/images/logo.png" alt="logo" />
-                PotFriend
+                <span className={"text-black"}>PotFriend</span>
               </Link>
             </div>
           </div>
@@ -56,18 +56,18 @@ const Navbar: React.FC = () => {
         id="logo-sidebar"
         className={clsx(
           isSidebarOpen && "!w-64",
-          "fixed left-0 top-0 z-40 h-screen w-0 overflow-hidden border-r  !border-gray-700 !bg-gray-800 pt-16 transition-all sm:translate-x-0 md:w-16"
+          "fixed left-0 top-0 z-40 h-screen w-0 overflow-hidden border-r !border-background-100 !bg-white pt-16 transition-all sm:translate-x-0 md:w-16"
         )}
         aria-label="Sidebar"
       >
-        <div className="h-full overflow-y-auto !bg-gray-800 px-3 pb-4">
+        <div className="h-full overflow-y-auto !bg-white px-3 pb-4">
           <ul className="space-y-2 pt-4 font-medium">
             <li>
               <Link
                 href="/"
                 className={clsx(
-                  pathname === "/" && "!bg-gray-700 ",
-                  " text-nowrap group flex flex-nowrap items-center rounded-lg p-2 !text-white hover:!bg-gray-600 "
+                  pathname === "/" && "!bg-primary-500",
+                  " text-nowrap group flex flex-nowrap items-center rounded-lg p-2 !text-white hover:!bg-secondary-300 "
                 )}
               >
                 <svg
@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
             <li>
               <button
                 onClick={() => signOut()}
-                className="text-nowrap group flex w-full flex-nowrap items-center rounded-lg p-2   text-red-500 hover:!bg-gray-600 "
+                className="text-nowrap group flex w-full flex-nowrap items-center rounded-lg p-2   text-red-500 hover:!bg-secondary-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
