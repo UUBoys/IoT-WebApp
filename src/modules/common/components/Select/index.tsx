@@ -41,7 +41,7 @@ const Select: React.FC<SelectProps> = ({
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           {label && <p className={"mb-1"}>{label}</p>}
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-[#FFAD32] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <Listbox.Button className="relative w-full cursor-default rounded-lg  py-2 pl-3 pr-10 text-left focus-visible:border-primary-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 h-[41.82px] focus-visible:ring-offset-orange-300 sm:text-sm  border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400  outline-none focus:outline-none">
             {selected ? (
               <span className="block truncate text-black">
                 {selected && selected.label}
@@ -70,9 +70,7 @@ const Select: React.FC<SelectProps> = ({
                   key={`${index}key`}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active
-                        ? "bg-[rgba(255,173,50,0.1)] text-[#FFAD32]"
-                        : "text-gray-900"
+                      active ? "bg-primary-200 text-white" : "text-gray-400"
                     }`
                   }
                   value={item}
@@ -89,7 +87,8 @@ const Select: React.FC<SelectProps> = ({
                       {selectedItem ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                           <CheckIcon
-                            sx={{ fontSize: "18px", color: "#FFAD32" }}
+                            sx={{ fontSize: "18px" }}
+                            className={"text-primary-500"}
                             aria-hidden="true"
                           />
                         </span>

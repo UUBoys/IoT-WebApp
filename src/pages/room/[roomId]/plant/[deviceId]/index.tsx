@@ -17,6 +17,11 @@ import { useRouter } from "next/router";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { usePlant } from "@/modules/common/hooks/QueryHooks/usePlant";
 import moment from "moment";
+import Select, { SelectItemProps } from "@/modules/common/components/Select";
+import { useEffect, useState } from "react";
+
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 
 ChartJS.register(
   CategoryScale,
@@ -30,16 +35,49 @@ ChartJS.register(
   Legend
 );
 
+const filterChartOptions = [
+  {
+    label: "Den",
+    value: "day",
+  },
+  {
+    label: "Týden",
+    value: "week",
+  },
+  {
+    label: "Měsíc",
+    value: "month",
+  },
+];
+
 const DeviceDetail = () => {
   const { push, query } = useRouter();
   const { plant } = usePlant(query.deviceId);
-  console.log(plant);
+
+  const [filterBy, setFilterBy] = useState<SelectItemProps>(
+    filterChartOptions[0]
+  );
+  const [filterDate, setFilterDate] = useState(new Date());
+  const [filteredData, setFileteredData] = useState<
+    {
+      id: string;
+      date: Date;
+      value: number;
+    }[]
+  >([]);
+
   const widgetClasses =
     "h-full w-full bg-white flex flex-col gap-3 p-4 rounded-md justify-center shadow-xl";
 
   const latestPlantMeasurement = plant?.measurements
     ? plant.measurements[plant.measurements.length - 1]
     : null;
+
+  useEffect(() => {
+    if (plant?.measurements.length) {
+      setFileteredData(plant.measurements);
+    }
+  }, [plant?.measurements]);
 
   const data = {
     datasets: [
@@ -68,17 +106,15 @@ const DeviceDetail = () => {
   };
 
   const lineData = {
-    labels: plant?.measurements
-      ? plant.measurements.map((measurement) =>
-          moment(measurement.date).format("HH:mm:ss")
-        )
-      : [],
+    labels: filteredData.map((measurement) =>
+      filterBy.value === "day"
+        ? moment(measurement.date).format("HH:mm:ss")
+        : moment(measurement.date).format("DD. mm. yy HH:mm:ss")
+    ),
     datasets: [
       {
         label: "Vlhkost půdy (v %)",
-        data: plant?.measurements
-          ? plant.measurements.map((measurement) => measurement.value)
-          : [],
+        data: filteredData.map((measurement) => measurement.value),
         fill: false,
         backgroundColor: "#00A6F6",
         borderColor: "#E1F5FE",
@@ -114,12 +150,60 @@ const DeviceDetail = () => {
     },
   };
 
+  const handleOnFilterChartChange = (e: SelectItemProps) => {
+    setFilterBy(e);
+    const selectedDate = moment(filterDate);
+
+    let filtered = [];
+    if (plant?.measurements) {
+      if (e.value === "day") {
+        filtered = plant.measurements.filter((measurement) =>
+          moment(measurement.date).isSame(selectedDate, "day")
+        );
+      } else if (e.value === "week") {
+        filtered = plant.measurements.filter((measurement) =>
+          moment(measurement.date).isSame(selectedDate, "week")
+        );
+      } else if (e.value === "month") {
+        filtered = plant.measurements.filter((measurement) =>
+          moment(measurement.date).isSame(selectedDate, "month")
+        );
+      }
+    }
+
+    setFileteredData(filtered);
+  };
+
+  const handleOnDateChange = (date) => {
+    setFilterDate(date);
+    const selectedDate = moment(date);
+
+    let filtered = [];
+    if (plant?.measurements) {
+      if (filterBy.value === "day") {
+        filtered = plant.measurements.filter((measurement) =>
+          moment(measurement.date).isSame(selectedDate, "day")
+        );
+      } else if (filterBy.value === "week") {
+        filtered = plant.measurements.filter((measurement) =>
+          moment(measurement.date).isSame(selectedDate, "week")
+        );
+      } else if (filterBy.value === "month") {
+        filtered = plant.measurements.filter((measurement) =>
+          moment(measurement.date).isSame(selectedDate, "month")
+        );
+      }
+    }
+
+    setFileteredData(filtered);
+  };
+
   if (!plant) return <></>;
   return (
     <div
       className={"px-6 mt-10 flex flex-col gap-10 pb-5 max-w-[1100px] mx-auto"}
     >
-      <div className={"grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-10"}>
+      <div className={"grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6"}>
         <div
           className={
             "h-full w-full flex flex-col gap-10 rounded-md justify-center"
@@ -155,7 +239,7 @@ const DeviceDetail = () => {
               </div>
             </div>
 
-            <p className={"text-sm font-medium text-gray-300 line-clamp-4"}>
+            <p className={"text-sm font-medium text-gray-300 line-clamp-[10]"}>
               {plant.description}
             </p>
           </div>
@@ -206,7 +290,30 @@ const DeviceDetail = () => {
         </div>
       </div>
 
-      <div className={"w-full bg-white p-3 rounded-md shadow-xl"}>
+      <div
+        className={
+          "bg-white shadow-xl rounded-md p-2  flex items-center flex-row justify-center gap-5 w-fit relative z-[10]"
+        }
+      >
+        <Select
+          items={filterChartOptions}
+          className={"w-[150px] relative top-[-2px]"}
+          onSelectedChange={handleOnFilterChartChange}
+          defaultSelected={filterBy}
+        />
+        <DatePicker
+          selected={filterDate}
+          onChange={handleOnDateChange}
+          className=" block w-[120px] rounded-lg border border-background-100 !bg-background-50 p-2.5  !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none text-black"
+          dateFormat="dd. MM. yyyy"
+        />
+      </div>
+
+      <div
+        className={
+          "w-full bg-white p-3 rounded-md shadow-xl relative top-[-20px]"
+        }
+      >
         <Bar data={lineData} options={barOptions} />
       </div>
     </div>
