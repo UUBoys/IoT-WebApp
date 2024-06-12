@@ -59,6 +59,7 @@ export const authOptions: NextAuthOptions = {
               shouldTrackStatus: false,
             },
           });
+          console.log(response);
         } catch (error) {
           console.error(error);
         }

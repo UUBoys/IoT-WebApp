@@ -192,7 +192,7 @@ const DeviceDetail = () => {
       </div>
 
       <div className={"w-full bg-gray-800 p-3 rounded-md"}>
-        <Line data={lineData} options={lineOptions} />
+        <Line data={lineData} />
       </div>
     </div>
   );

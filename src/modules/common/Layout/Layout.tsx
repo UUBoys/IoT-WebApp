@@ -9,8 +9,8 @@ import LayoutContext from "./LyoutContext";
 
 import { isInRestrictedPath } from "@/modules/helpers/general";
 import { LoadingType } from "@/modules/helpers/loader-helpers";
-import Navbar from "@/modules/common/components/NavBar";
 
+import Navbar from "../components/Navbar";
 interface LayoutProps {
   children: React.ReactNode;
 }

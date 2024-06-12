@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { plantSchema } from "./device";
+import { plantSchema } from "./plant";
 
 export const roomSchema = z.object({
   id: z.string(),

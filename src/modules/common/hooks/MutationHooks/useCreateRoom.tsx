@@ -1,18 +1,14 @@
 import { FetchResult, useMutation } from "@apollo/client";
 
-import { Mutation, UpdatePlantInput } from "@/generated/graphql";
-import { UPDATE_PLANT_MUTATION } from "@/modules/GRAPHQL/mutations/UpdatePlantMutation";
+import { Mutation, MutationCreateRoomArgs } from "@/generated/graphql";
+import { CREATE_ROOM_MUTATION } from "@/modules/GRAPHQL/mutations/CreateRoomMutation";
 
-interface IUpdatePlantHook {
-  updatePlantAsync: (
-    type: string,
-    name: string,
-    plantId: string
-  ) => Promise<FetchResult<Mutation>>;
+interface ICreateRoomHook {
+  createRoomAsync: (name: string) => Promise<FetchResult<Mutation>>;
 }
 
-export const useUpdatePlant = (): IUpdatePlantHook => {
-  const [updatePlant] = useMutation<Mutation>(UPDATE_PLANT_MUTATION, {
+export const useCreateRoom = (): ICreateRoomHook => {
+  const [createRoom] = useMutation<Mutation>(CREATE_ROOM_MUTATION, {
     context: { shouldTrackStatus: true, withConfirmation: true },
     onCompleted: (data) => {
       if (!data.updatePlant) return;
@@ -20,19 +16,18 @@ export const useUpdatePlant = (): IUpdatePlantHook => {
     },
   });
 
-  const updatePlantAsync = async (
-    type: string,
-    name: string,
-    plantId: string
-  ) => {
-    const variables: UpdatePlantInput = {
-      name,
-      type,
-      plantId,
+  const createRoomAsync = async (name: string) => {
+    const variables: MutationCreateRoomArgs = {
+      room: {
+        name: name,
+        plants: [],
+      },
     };
-    return updatePlant({
+
+    console.log(variables);
+    return createRoom({
       variables,
     });
   };
-  return { updatePlantAsync };
+  return { createRoomAsync };
 };

@@ -10,7 +10,7 @@ import { useModalStore } from "@/modules/common/stores/modal-store";
 import CreateNewRoomModal, {
   ICreateNewRoomValues,
 } from "@/modules/common/modals/CreateNewRoomModal";
-// import { useCreateRoom } from "@/modules/common/hooks/MutationHooks/useCreateRoom";
+import { useCreateRoom } from "@/modules/common/hooks/MutationHooks/useCreateRoom";
 import { useRooms } from "@/modules/common/hooks/QueryHooks/useRooms";
 
 const Home: NextPage = () => {
@@ -20,9 +20,9 @@ const Home: NextPage = () => {
   }));
   const [defaultError, setDefaultError] = useState("");
 
-  // const { createRoomAsync } = useCreateRoom();
+  const { createRoomAsync } = useCreateRoom();
   const { rooms, refetchRooms } = useRooms();
-
+  console.log(rooms);
   const createNewRoom = async (deviceValues: ICreateNewRoomValues) => {
     try {
       await createRoomAsync(deviceValues.name);
@@ -61,7 +61,7 @@ const Home: NextPage = () => {
         </Button>
       </div>
       {rooms.map((room) => (
-        <RoomWithPlants key={room.id} room={room} />
+        <RoomWithPlants refetchRooms={refetchRooms} key={room.id} room={room} />
       ))}
       {rooms.length === 0 && (
         <div className="flex w-full justify-center items-center h-[80vh]">

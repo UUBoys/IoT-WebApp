@@ -1,6 +1,6 @@
 import { FetchResult, useMutation } from "@apollo/client";
 
-import { Mutation, PairPlantInput } from "@/generated/graphql";
+import { Mutation, MutationPairPlantArgs } from "@/generated/graphql";
 import { PAIR_PLANT_MUTATION } from "@/modules/GRAPHQL/mutations/PairPlantMutation";
 
 interface IUserPairPlantHook {
@@ -21,10 +21,12 @@ export const usePairPlant = (): IUserPairPlantHook => {
   });
 
   const pairPlantAsync = async (type: string, name: string, token: string) => {
-    const variables: PairPlantInput = {
-      name,
-      type,
-      token,
+    const variables: MutationPairPlantArgs = {
+      pairPlantInput: {
+        name,
+        type,
+        pairingCode: token,
+      },
     };
     return pairPlant({
       variables,

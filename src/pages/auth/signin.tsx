@@ -12,8 +12,7 @@ import { lazy, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-const Lottie = lazy(() => import('lottie-react'));
-
+const Lottie = lazy(() => import("lottie-react"));
 
 import qUpLoaderAnimation from "../../../public/animations/loader-animation.json";
 
@@ -47,6 +46,7 @@ export const SignIn = () => {
     } else if (res?.url) {
       const url = new URL(res?.url);
       const redirectUrl = url.searchParams.get("callbackUrl");
+      console.log(redirectUrl);
       router.push(redirectUrl || res.url);
       return;
     }

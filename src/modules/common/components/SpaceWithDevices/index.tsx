@@ -11,25 +11,38 @@ import DeviceCard from "../DeviceCard";
 
 import { uuid } from "@/modules/helpers/general";
 import { IRoom } from "@/modules/utils/schemas/room";
+import { usePairPlant } from "../../hooks/MutationHooks/usePairPlant";
+import { toast } from "react-toastify";
 
 interface IRoomWithPlantsProps {
   room: IRoom;
   className?: string;
+  refetchRooms?: () => void;
 }
 
 const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
   room: { plants: devices, name },
+  refetchRooms,
   className = "",
 }) => {
+  console.log("RoomWithPlants", devices);
   const [defaultError, setDefaultError] = useState("");
   const { openModal, closeModal } = useModalStore((s) => ({
     openModal: s.openModal,
     closeModal: s.closeModal,
   }));
+  const { pairPlantAsync } = usePairPlant();
 
   const addNewDevice = async (deviceValues: AddNewDeviceValues) => {
     console.log("Add new device", deviceValues);
-    setDefaultError("pepega");
+    try {
+      await pairPlantAsync("plant", deviceValues.name, deviceValues.deviceId);
+      refetchRooms && refetchRooms();
+      closeModal();
+      toast.success("Kytička se vytvořila úspěšně!");
+    } catch (error: any) {
+      toast.error(error || "Něco se pokazilo!");
+    }
   };
 
   const openEditAppModal = () => {

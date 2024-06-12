@@ -1,18 +1,13 @@
 import { FetchResult, useMutation } from "@apollo/client";
 
-import {
-  Mutation,
-  MutationDeleteRoomArgs,
-  MutationRemovePlantArgs,
-} from "@/generated/graphql";
-import { DELETE_ROOM_MUTATION } from "@/modules/GRAPHQL/mutations/DeleteRoomMutation";
+import { Mutation, MutationRemovePlantArgs } from "@/generated/graphql";
 import { REMOVE_PLANT_MUTATION } from "@/modules/GRAPHQL/mutations/RemovePlantMutation";
 
 interface IDeletePlantHook {
   deletePlantAsync: (id: string) => Promise<FetchResult<Mutation>>;
 }
 
-export const useDeleteRoom = (): IDeletePlantHook => {
+export const useRemovePlant = (): IDeletePlantHook => {
   const [deletePlant] = useMutation<Mutation>(REMOVE_PLANT_MUTATION, {
     context: { shouldTrackStatus: true, withConfirmation: true },
     onCompleted: (data) => {

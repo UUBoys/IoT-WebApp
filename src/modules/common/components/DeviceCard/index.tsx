@@ -3,7 +3,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-import { IPlant } from "@/modules/utils/schemas/device";
+import { IPlant } from "@/modules/utils/schemas/plant";
 import Badge from "../Bagde";
 
 interface IDeviceCardProps {

@@ -16,6 +16,7 @@ export const useRooms = (): IUseRoomsHook => {
     fetchPolicy: "cache-and-network",
     context: { shouldTrackStatus: true },
     onCompleted(data) {
+      console.log(data);
       if (!data.rooms || data.rooms.length <= 0) {
         return;
       }
