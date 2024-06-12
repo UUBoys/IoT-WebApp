@@ -116,7 +116,9 @@ const DeviceDetail = () => {
 
   if (!plant) return <></>;
   return (
-    <div className={"px-6 mt-10 flex flex-col gap-10"}>
+    <div
+      className={"px-6 mt-10 flex flex-col gap-10 pb-5 max-w-[1100px] mx-auto"}
+    >
       <div className={"grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-10"}>
         <div
           className={
