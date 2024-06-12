@@ -3,7 +3,7 @@ import { mesurementSchema } from "./mesurement";
 
 export const plantSchema = z.object({
   id: z.string(),
-  image: z.string(),
+  imageUrl: z.string(),
   name: z.string(),
   description: z.string(),
   type: z.string(),

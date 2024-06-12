@@ -1,22 +1,23 @@
 import { gql } from "@apollo/client";
 
 export const GET_ROOM = gql`
-  query Rooms {
-    query Room($roomId: String!) {
-  room(id: $roomId) {
-    id
-    name
-    plants {
+  query Room($roomId: String!) {
+    room(id: $roomId) {
       id
-      type
       name
-      lastHeartbeat
-      measurements {
+      inviteCode
+      plants {
         id
-        value
-        date
+        type
+        name
+        imageUrl
+        lastHeartbeat
+        measurements {
+          id
+          value
+          date
+        }
       }
     }
   }
-}
 `;

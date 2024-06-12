@@ -12,7 +12,7 @@ interface IDeviceCardProps {
 }
 
 const DeviceCard: React.FC<IDeviceCardProps> = ({
-  device: { description, id: id, image, name },
+  device: { description, id: id, imageUrl: image, name },
   className = "",
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);

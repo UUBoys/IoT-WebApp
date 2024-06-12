@@ -125,16 +125,16 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
         loading={isPairedLoading}
         duration={2000}
       />
-      <div className="flex w-full flex-col  h-full flex-1 gap-2">
+      <div
+        onClick={() => push(`/room/${id}`)}
+        className="flex w-full flex-col  h-full flex-1 gap-2"
+      >
         <div
           className={
             "flex-1 w-full flex flex-row justify-between items-center gap-2"
           }
         >
-          <h1
-            className="text-xl text-black font-bold cursor-pointer"
-            onClick={() => push(`/room/${id}}`)}
-          >
+          <h1 className="text-xl text-black font-bold cursor-pointer">
             {name}
           </h1>
           <AddToQueueIcon

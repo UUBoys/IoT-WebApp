@@ -22,7 +22,8 @@ export const Default: Story = {
           id: "1",
           name: "Philips Hue",
           description: "RGB LED Strip",
-          image: "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
+          imageUrl:
+            "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
           mesurements: [
             {
               id: uuid(),
@@ -46,7 +47,8 @@ export const Default: Story = {
           id: "2",
           name: "Philips Hue",
           description: "RGB LED Strip",
-          image: "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
+          imageUrl:
+            "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
           mesurements: [
             {
               id: uuid(),
@@ -70,7 +72,8 @@ export const Default: Story = {
           id: "3",
           name: "Philips Hue",
           description: "RGB LED Strip",
-          image: "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
+          imageUrl:
+            "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
           mesurements: [
             {
               id: uuid(),
@@ -94,7 +97,8 @@ export const Default: Story = {
           id: "4",
           name: "Philips Hue",
           description: "RGB LED Strip",
-          image: "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
+          imageUrl:
+            "https://images.unsplash.com/photo-1612834420304-4e0b0e6f8c1b",
           mesurements: [
             {
               id: uuid(),

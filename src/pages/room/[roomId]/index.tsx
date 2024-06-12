@@ -3,14 +3,22 @@ import { useRoom } from "@/modules/common/hooks/QueryHooks/useRoom";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import clsx from "clsx";
+import { IPlant } from "@/modules/utils/schemas/plant";
 
 const RoomDetail = () => {
-  const { query } = useRouter();
-  // const { room } = useRoom(query.id as string);
-
-  const renderDeviceBlock = (status: "success" | "danger" | "warning") => {
+  const { query, push } = useRouter();
+  const { room } = useRoom(query.roomId as string);
+  const renderDeviceBlock = (
+    plant: IPlant,
+    status: "success" | "danger" | "warning"
+  ) => {
     return (
-      <div className={"relative bg-transparent mt-[20px]"}>
+      <div
+        onClick={() => {
+          push(`${room}/plant/${plant.id}`);
+        }}
+        className={"relative bg-transparent cursor-pointer mt-[20px]"}
+      >
         <div
           className={clsx(
             "ml-[15px] w-[100px] h-[20px] bg-${status}-500 rounded-t-md flex items-center justify-center shadow-2xl",
@@ -25,7 +33,7 @@ const RoomDetail = () => {
         </div>
         <div
           className={
-            "w-full border-b border-background-100 flex justify-between items-center flex-row gap-4 bg-white shadow-2xl rounded-md"
+            "w-full border-b border-background-100 flex justify-between items-center flex-row gap-4 bg-white hover:shadow-2xl shadow-lg transition-all hover:scale-[1.01] rounded-md"
           }
         >
           <Image
@@ -36,17 +44,9 @@ const RoomDetail = () => {
             width={80}
           />
           <div className={"flex flex-col  justify-evenly h-[70px] w-full"}>
-            <p className={"font-bold text-black min-w-max"}>
-              Moje nove zarizeni
-            </p>
+            <p className={"font-bold text-black min-w-max"}>{plant.name}</p>
             <p className={"text-gray-300 line-clamp-3 max-w-full"}>
-              Lorem inpsum test adk qpos k dasd asdasda dasd asdasocwemqw mkqwoq
-              fweofweqofmwefokq fweofweqofmwefokq fweofweqofmwefokq
-              fweofweqofmwefokq adk qpos k dasd asdasda dasd asdasocwemqw mkqwoq
-              fweofweqofmwefokq fweofweqofmwefokq fweofweqofmwefokq
-              fweofweqofmwefokq adk qpos k dasd asdasda dasd asdasocwemqw mkqwoq
-              fweofweqofmwefokq fweofweqofmwefokq fweofweqofmwefokq
-              fweofweqofmwefokq
+              {plant.description}
             </p>
           </div>
         </div>
@@ -55,11 +55,11 @@ const RoomDetail = () => {
   };
   return (
     <div className={"w-full px-4 md:px-20 mt-[40px]"}>
-      <p className={"text-black font-bold text-xl"}>{"{roomName}"}</p>
+      <p className={"text-black font-bold text-xl"}>{room?.name}</p>
 
-      {renderDeviceBlock("success")}
-      {renderDeviceBlock("danger")}
-      {renderDeviceBlock("warning")}
+      {room?.plants.map((plant) => {
+        return renderDeviceBlock(plant, "success");
+      })}
     </div>
   );
 };

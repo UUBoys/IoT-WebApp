@@ -15,7 +15,7 @@ export const Default: Story = {
     device: {
       description: "Toto je rostlinka lilie. Potřebuje zalévat každý den.",
       id: "sl213-1flfn-3121j-sfnk23",
-      image: "",
+      imageUrl: "",
       name: "Lilie 1",
       type: "type",
       mesurements: [],
