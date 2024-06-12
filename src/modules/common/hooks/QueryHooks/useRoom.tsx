@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Query } from "@/generated/graphql";
 import { IRoom } from "@/modules/utils/schemas/room";
@@ -13,19 +13,19 @@ interface IUseRoomHook {
 export const useRoom = (roomId: string | number): IUseRoomHook => {
   const [room, setRoom] = useState<IRoom | null>(null);
 
-  const { refetch } = useQuery<Query>(GET_ROOM, {
+  const { data, refetch } = useQuery<Query>(GET_ROOM, {
     fetchPolicy: "cache-and-network",
 
     context: { shouldTrackStatus: true },
     variables: { roomId },
     skip: !roomId,
-    onCompleted(data) {
-      if (!data.room) return;
-      console.log(data);
-      setRoom(data.room as unknown as IRoom);
-    },
   });
-
+  useEffect(() => {
+    if (data?.room) {
+      console.log(data?.room);
+      setRoom(data.room as unknown as IRoom);
+    }
+  }, [data]);
   return {
     room,
     refetchRoom: refetch,

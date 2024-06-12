@@ -7,7 +7,9 @@ interface IUserPairPlantHook {
   pairPlantAsync: (
     type: string,
     name: string,
-    token: string
+    token: string,
+    imageUrl?: string,
+    description?: string
   ) => Promise<FetchResult<Mutation>>;
 }
 
@@ -20,12 +22,20 @@ export const usePairPlant = (): IUserPairPlantHook => {
     },
   });
 
-  const pairPlantAsync = async (type: string, name: string, token: string) => {
+  const pairPlantAsync = async (
+    type: string,
+    name: string,
+    token: string,
+    imageUrl?: string,
+    description?: string
+  ) => {
     const variables: MutationPairPlantArgs = {
       pairPlantInput: {
         name,
         type,
         pairingCode: token,
+        imageUrl,
+        description: description ?? "",
       },
     };
     return pairPlant({

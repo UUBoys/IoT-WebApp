@@ -13,7 +13,6 @@ export const useUpdateRoom = (): IUpdateRoomHook => {
     context: { shouldTrackStatus: true, withConfirmation: true },
     onCompleted: (data) => {
       if (!data.updateRoom) return;
-      console.log(data);
     },
   });
 
@@ -22,7 +21,6 @@ export const useUpdateRoom = (): IUpdateRoomHook => {
       roomUpdate: { name: room.name, roomId: room.id },
     };
 
-    console.log(variables);
     return updateRoom({
       variables,
     });
