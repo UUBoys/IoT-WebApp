@@ -11,7 +11,7 @@ export const useDeleteRoom = (): IDeleteRoomHook => {
   const [deleteRoom] = useMutation<Mutation>(DELETE_ROOM_MUTATION, {
     context: { shouldTrackStatus: true, withConfirmation: true },
     onCompleted: (data) => {
-      if (!data.updatePlant) return;
+      if (!data.deleteRoom) return;
       console.log(data);
     },
   });

@@ -11,11 +11,31 @@ import { useModalStore } from "@/modules/common/stores/modal-store";
 import EditRoomModal, {
   IEditRoomValues,
 } from "@/modules/common/modals/EditRoomModal";
-import SendIcon from "@mui/icons-material/Send";
+import CloseIcon from "@mui/icons-material/Close";
+import QRCode from "react-qr-code";
 
-const RoomDetail = () => {
+import SendIcon from "@mui/icons-material/Send";
+import { useUpdateRoom } from "@/modules/common/hooks/MutationHooks/useUpdateRoom";
+import { toast } from "react-toastify";
+import { NextPage } from "next";
+
+export async function getServerSideProps(context: {
+  req: { headers: { host: any } };
+}) {
+  const host = context.req.headers.host;
+
+  return {
+    props: {
+      host,
+    },
+  };
+}
+
+const RoomDetail: NextPage<{ host: string }> = ({ host }) => {
   const { query, push } = useRouter();
+  console.log(host);
   const { room, refetchRoom } = useRoom(query.roomId as string);
+  const { updateRoomAsync } = useUpdateRoom();
   const [defaultError, setDefaultError] = useState("");
 
   const { openModal, closeModal } = useModalStore((s) => ({
@@ -24,13 +44,67 @@ const RoomDetail = () => {
   }));
   const editRoom = async (roomValues: IEditRoomValues) => {
     try {
-      console.log(roomValues);
+      await updateRoomAsync({
+        id: query.roomId as string,
+        name: roomValues.name,
+        plants: [],
+      });
       refetchRoom();
       closeModal();
+      toast.success("Místnost byla úspěšně upravena!");
     } catch (error: any) {
       setDefaultError(error || "Něco se pokazilo!");
+      toast.error("Něco se pokazilo!", error);
     }
   };
+
+  const openShareRoomModal = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `https://${host}/joinRoom/${room?.inviteCode}?roomId=${room?.id}`
+      );
+      toast("📩 Odkaz zkopírován!", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.log("Text copied to clipboard");
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+    openModal({
+      isClosable: true,
+      content: (
+        <div className="flex w-full justify-center pb-10  flex-col items-center  align-top">
+          <div className="flex w-full items-center justify-end gap-6 mt-[10px]">
+            <div className="flex gap-5 text-end">
+              <Button
+                onClick={closeModal}
+                type="button"
+                color="transparent"
+                size="lg"
+                className="w-20"
+              >
+                <CloseIcon className="h-5 text-black w-5" />
+              </Button>
+            </div>
+          </div>
+          <div className="flex   flex-col items-start rounded-lg bg-white text-center  ">
+            <QRCode
+              className="w-full shadow-xl"
+              value={`https://${host}/joinRoom/${room?.inviteCode}?roomId=${room?.id}`}
+            />
+          </div>
+        </div>
+      ),
+    });
+  };
+
   const openEditRoomModal = () => {
     openModal({
       isClosable: false,
@@ -39,17 +113,12 @@ const RoomDetail = () => {
           closeModal={closeModal}
           editRoom={editRoom}
           defaultError={defaultError}
+          defaultValues={{ name: room?.name || "" }}
         />
       ),
     });
   };
-  console.log(room);
-  const openInviteCodeModal = () => {
-    openModal({
-      isClosable: false,
-      content: <div></div>,
-    });
-  };
+
   const renderDeviceBlock = (
     plant: IPlant,
     status: "success" | "danger" | "warning"
@@ -106,7 +175,7 @@ const RoomDetail = () => {
             className=" !h-12 !px-3 text-lg "
             size="md"
             color="secondary"
-            onClick={openEditRoomModal}
+            onClick={openShareRoomModal}
           >
             <div className="flex items-center justify-between !gap-2 ">
               <SendIcon className="h-5 w-5" />

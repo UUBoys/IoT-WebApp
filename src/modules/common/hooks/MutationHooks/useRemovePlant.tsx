@@ -11,7 +11,7 @@ export const useRemovePlant = (): IDeletePlantHook => {
   const [deletePlant] = useMutation<Mutation>(REMOVE_PLANT_MUTATION, {
     context: { shouldTrackStatus: true, withConfirmation: true },
     onCompleted: (data) => {
-      if (!data.updatePlant) return;
+      if (!data.removePlant) return;
       console.log(data);
     },
   });

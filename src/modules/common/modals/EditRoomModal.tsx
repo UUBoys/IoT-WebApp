@@ -10,6 +10,7 @@ export interface IEditRoomValues {
 interface IEditRoomModalProps {
   editRoom: (data: IEditRoomValues) => Promise<void>;
   defaultError?: string;
+  defaultValues?: IEditRoomValues;
   closeModal: () => void;
 }
 
@@ -17,8 +18,11 @@ const EditRoomModal: React.FC<IEditRoomModalProps> = ({
   editRoom,
   defaultError,
   closeModal,
+  defaultValues,
 }) => {
-  const { register, handleSubmit } = useForm<IEditRoomValues>();
+  const { register, handleSubmit } = useForm<IEditRoomValues>({
+    defaultValues,
+  });
 
   return (
     <div className="flex w-full flex-col items-center  align-top">

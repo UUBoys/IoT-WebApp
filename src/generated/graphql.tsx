@@ -19,11 +19,6 @@ export type AddPlantsToRoomInput = {
   roomId: Scalars['String']['input'];
 };
 
-export type AddUserToRoomInput = {
-  inviteCode: Scalars['String']['input'];
-  roomId: Scalars['String']['input'];
-};
-
 export type AuthResult = {
   __typename?: 'AuthResult';
   /** This is the token used for authentication (JWT Bearer) */
@@ -48,6 +43,10 @@ export type GetMeasurementsInput = {
   plantId: Scalars['String']['input'];
 };
 
+export type JoinRoomInput = {
+  inviteCode: Scalars['String']['input'];
+};
+
 export type LoginInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -63,9 +62,9 @@ export type Measurement = {
 export type Mutation = {
   __typename?: 'Mutation';
   addPlantsToRoom?: Maybe<Room>;
-  addUserToRoom?: Maybe<Scalars['Boolean']['output']>;
   createRoom?: Maybe<Room>;
   deleteRoom?: Maybe<Room>;
+  joinRoom?: Maybe<Scalars['Boolean']['output']>;
   login?: Maybe<AuthResult>;
   pairPlant: Plant;
   register?: Maybe<AuthResult>;
@@ -81,11 +80,6 @@ export type MutationAddPlantsToRoomArgs = {
 };
 
 
-export type MutationAddUserToRoomArgs = {
-  addUser: AddUserToRoomInput;
-};
-
-
 export type MutationCreateRoomArgs = {
   room: CreateRoomInput;
 };
@@ -93,6 +87,11 @@ export type MutationCreateRoomArgs = {
 
 export type MutationDeleteRoomArgs = {
   roomId: Scalars['String']['input'];
+};
+
+
+export type MutationJoinRoomArgs = {
+  joinRoom: JoinRoomInput;
 };
 
 
@@ -127,7 +126,7 @@ export type MutationUpdatePlantArgs = {
 
 
 export type MutationUpdateRoomArgs = {
-  roomUpdate: UpdatePlantInput;
+  roomUpdate: UpdateRoomInput;
 };
 
 export type PairPlantInput = {
