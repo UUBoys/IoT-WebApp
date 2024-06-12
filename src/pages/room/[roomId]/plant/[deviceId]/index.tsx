@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Doughnut, Line } from "react-chartjs-2";
+import { Doughnut, Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  BarElement, // Add BarElement for Bar charts
+  ArcElement, // Add ArcElement for Doughnut charts
   Title,
   Tooltip,
   Legend,
@@ -13,11 +15,16 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { usePlant } from "@/modules/common/hooks/QueryHooks/usePlant";
+import moment from "moment";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  BarElement, // Register BarElement for Bar charts
+  ArcElement, // Register ArcElement for Doughnut charts
   Title,
   Tooltip,
   Legend
@@ -25,60 +32,68 @@ ChartJS.register(
 
 const DeviceDetail = () => {
   const { push, query } = useRouter();
+  const { plant } = usePlant(query.deviceId);
+  console.log(plant);
   const widgetClasses =
-    "h-full w-full bg-gray-800 flex flex-col gap-3 p-4 rounded-md justify-center";
+    "h-full w-full bg-white flex flex-col gap-3 p-4 rounded-md justify-center shadow-xl";
+
+  const latestPlantMeasurement = plant?.measurements
+    ? plant.measurements[plant.measurements.length - 1]
+    : null;
 
   const data = {
     datasets: [
       {
-        data: [75, 25],
-        backgroundColor: ["#1AA7EC", "transparent"],
-        borderColor: ["#1E2F97", "transparent"],
+        data: [
+          latestPlantMeasurement ? latestPlantMeasurement.value : 0,
+          latestPlantMeasurement ? 100 - latestPlantMeasurement.value : 0,
+        ],
+        backgroundColor: ["#00A6F6", "#E1F5FE"],
+        borderColor: ["transparent", "transparent"],
         // hoverBackgroundColor: ["#FF6384", "transparent"],
         text: "Total: 9000+",
       },
     ],
-    labels: ["water", "Drained"],
+    labels: ["Vlhkost", "Suchost"],
   };
 
   const options = {
     rotation: -90,
     cutout: "80%",
-    legend: {
-      display: true,
-      position: "right",
+    plugins: {
+      legend: {
+        display: false, // Ensure the legend is hidden
+      },
     },
   };
 
   const lineData = {
-    labels: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
+    labels: plant?.measurements
+      ? plant.measurements.map((measurement) =>
+          moment(measurement.date).format("HH:mm:ss")
+        )
+      : [],
     datasets: [
       {
-        label: "Water Usage (liters)",
-        data: [12, 19, 3, 5, 2, 3, 7],
+        label: "Vlhkost půdy (v %)",
+        data: plant?.measurements
+          ? plant.measurements.map((measurement) => measurement.value)
+          : [],
         fill: false,
-        backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
+        backgroundColor: "#00A6F6",
+        borderColor: "#E1F5FE",
       },
     ],
   };
 
-  const lineOptions = {
+  const barOptions = {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        display: false,
       },
       title: {
-        display: true,
+        display: false,
         text: "Daily Water Usage",
       },
     },
@@ -87,18 +102,19 @@ const DeviceDetail = () => {
         beginAtZero: true,
         title: {
           display: true,
-          text: "Liters",
+          text: "% Vlhkosti",
         },
       },
       x: {
         title: {
           display: true,
-          text: "Days",
+          text: "Datum a čas",
         },
       },
     },
   };
 
+  if (!plant) return <></>;
   return (
     <div className={"px-6 mt-10 flex flex-col gap-10"}>
       <div className={"grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-10"}>
@@ -109,32 +125,33 @@ const DeviceDetail = () => {
         >
           <div
             className={
-              " w-full bg-gray-800 flex flex-col gap-3 p-4 rounded-md  h-full"
+              " w-full bg-white flex flex-col gap-3 p-4 rounded-md  h-full shadow-xl"
             }
           >
             <div className={"flex flex-row justify-between items-center"}>
-              <h1 className={"font-bold text-xl"}>{"{DeviceName}"}</h1>
+              <h1 className={"font-bold text-xl text-black"}>{plant.name}</h1>
               <div className={"flex flex-row gap-3 items-center"}>
-                <div className={"bg-lime-500 px-3 py-2 rounded-md"}>Online</div>
+                {plant.isOnline ? (
+                  <div className={"bg-success-500 px-3 py-2 rounded-md"}>
+                    Online
+                  </div>
+                ) : (
+                  <div className={"bg-danger-500 px-3 py-2 rounded-md"}>
+                    Offline
+                  </div>
+                )}
                 <SettingsIcon
                   onClick={() => push(`/device/${query.id}/settings`)}
                 />
               </div>
             </div>
-            <p className={"text-sm font-medium"}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              id nunc mollis, malesuada tortor non, vulputate enim. Pellentesque
-              auctor ornare nibh ac imperdiet. Nulla facilisi. Aliquam interdum
-              et ex id dignissim. Fusce scelerisque, lectus ut scelerisque
-              volutpat, quam leo elementum nisl, ut tempus urna dui eu odio.
-              Suspendisse suscipit, sem quis feugiat pretium, libero ex posuere
-              ligula, egestas fringilla arcu ipsum eget mauris. Integer eget
-              sodales ante.
+            <p className={"text-sm font-medium text-gray-300"}>
+              {plant.description}
             </p>
           </div>
           <div
             className={
-              "h-[200px] w-full bg-gray-800 flex flex-col gap-3 p-4 rounded-md justify-center"
+              "h-[200px] w-full bg-white flex flex-col gap-3 p-4 rounded-md justify-center shadow-xl"
             }
           >
             <div className={"flex flex-row gap-5 w-full"}>
@@ -171,11 +188,12 @@ const DeviceDetail = () => {
         </div>
         <div
           className={
-            "h-full w-full bg-gray-800 flex flex-col gap-3 rounded-md justify-center relative"
+            "h-full w-full bg-gray-800 flex flex-col gap-3 rounded-md justify-center relative shadow-xl"
           }
         >
           <Image
             src={
+              plant.imageUrl ||
               "https://g.denik.cz/15/aa/lide-od-vedle-jan-port-teplice-mladi-me-neberou-jako-starecka-07_denik-630.jpg"
             }
             className={"rounded-md"}
@@ -184,16 +202,31 @@ const DeviceDetail = () => {
           />
         </div>
         <div className={widgetClasses}>
-          <h1 className={"font-bold text-xl"}>Water level</h1>
-          <Doughnut data={data} options={options} />
+          <h1 className={"font-bold text-xl text-black"}>Vlhkost</h1>
+          <div className={"w-full h-fit relative"}>
+            <Doughnut data={data} options={options} />
+            <p
+              className={
+                "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black font-bold text-2xl"
+              }
+            >
+              {latestPlantMeasurement &&
+                latestPlantMeasurement.value.toFixed(2)}
+              %
+            </p>
+          </div>
           <p className={"text-gray-500 text-center"}>
-            Last update: 21 minutes ago
+            {plant.measurements && plant.measurements.length
+              ? `Poslední aktualizace: ${moment(
+                  plant.measurements[plant.measurements.length - 1].date
+                ).fromNow()}`
+              : ""}
           </p>
         </div>
       </div>
 
-      <div className={"w-full bg-gray-800 p-3 rounded-md"}>
-        <Line data={lineData} />
+      <div className={"w-full bg-white p-3 rounded-md"}>
+        <Bar data={lineData} options={barOptions} />
       </div>
     </div>
   );

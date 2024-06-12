@@ -8,13 +8,14 @@ interface IUseCheckPairingProccessHook {
   loading: boolean;
   error: string | null;
   setPairingCode: Dispatch<SetStateAction<string>>;
+  onPairingComplete?: (plantId: string) => void;
 }
 
 export const useCheckPairingProccess = (
-  pairingCodePar?: string
+  onPairingComplete?: (plantId: string) => void
 ): IUseCheckPairingProccessHook => {
   const [isPaired, setIsPaired] = useState<boolean | null>(false);
-  const [pairingCode, setPairingCode] = useState<string>(pairingCodePar ?? "");
+  const [pairingCode, setPairingCode] = useState<string>("");
   const [debouncedPairingCode, setDebouncedPairingCode] =
     useState<string>(pairingCode);
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,12 +55,12 @@ export const useCheckPairingProccess = (
     if (loading && loadingStartTime !== null) {
       const timeoutHandler = setTimeout(
         () => {
-          if (Date.now() - loadingStartTime >= 15000) {
+          if (Date.now() - loadingStartTime >= 120000) {
             setError("Timeout");
             setLoading(false);
           }
         },
-        15000 - (Date.now() - loadingStartTime)
+        120000 - (Date.now() - loadingStartTime)
       );
 
       return () => {
@@ -80,24 +81,24 @@ export const useCheckPairingProccess = (
     if (queryError) {
       setError("Something went wrong!");
       setLoading(false);
-    } else if (data) {
-      console.log(data);
-      if (
-        !data.checkPairingProcess.serverPaired ||
-        !data.checkPairingProcess.userPaired
-      ) {
-        setIsPaired(false);
-        setLoading(true);
-        return;
-      }
-      setIsPaired(true);
-      setPairingCode("");
-      setLoading(false);
-      console.log("Completed");
-      setLoadingStartTime(null); // Reset loading start time on successful completion
+      return;
     }
-  }, [data, queryError]);
-  console.log(debouncedPairingCode);
+    if (!data) return;
+    if (
+      !data.checkPairingProcess.serverPaired ||
+      !data.checkPairingProcess.userPaired
+    ) {
+      setIsPaired(false);
+      setLoading(true);
+      return;
+    }
+    setIsPaired(true);
+    setPairingCode("");
+    setLoading(false);
+    onPairingComplete &&
+      onPairingComplete(data?.checkPairingProcess.plantId || "");
+    setLoadingStartTime(null);
+  }, [data, onPairingComplete, queryError]);
 
   return {
     isPaired,

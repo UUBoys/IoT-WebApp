@@ -32,6 +32,7 @@ export type AuthResult = {
 
 export type CheckPairingProcessResponse = {
   __typename?: 'CheckPairingProcessResponse';
+  plantId: Scalars['String']['output'];
   serverPaired: Scalars['Boolean']['output'];
   userPaired: Scalars['Boolean']['output'];
 };
@@ -39,6 +40,12 @@ export type CheckPairingProcessResponse = {
 export type CreateRoomInput = {
   name: Scalars['String']['input'];
   plants?: InputMaybe<Array<InputMaybe<RoomPlantInput>>>;
+};
+
+export type GetMeasurementsInput = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  plantId: Scalars['String']['input'];
 };
 
 export type LoginInput = {
@@ -65,6 +72,7 @@ export type Mutation = {
   removePlant: RemovePlantResponse;
   removePlantsFromRoom?: Maybe<Room>;
   updatePlant: Plant;
+  updateRoom?: Maybe<Room>;
 };
 
 
@@ -117,7 +125,14 @@ export type MutationUpdatePlantArgs = {
   updatePlantInput: UpdatePlantInput;
 };
 
+
+export type MutationUpdateRoomArgs = {
+  roomUpdate: UpdatePlantInput;
+};
+
 export type PairPlantInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  imageUrl?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   pairingCode: Scalars['String']['input'];
   type: Scalars['String']['input'];
@@ -125,7 +140,10 @@ export type PairPlantInput = {
 
 export type Plant = {
   __typename?: 'Plant';
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
+  imageUrl?: Maybe<Scalars['String']['output']>;
+  isOnline: Scalars['Boolean']['output'];
   lastHeartbeat?: Maybe<Scalars['String']['output']>;
   measurements?: Maybe<Array<Maybe<Measurement>>>;
   name: Scalars['String']['output'];
@@ -136,6 +154,7 @@ export type Plant = {
 export type Query = {
   __typename?: 'Query';
   checkPairingProcess: CheckPairingProcessResponse;
+  getMeasurements?: Maybe<Array<Maybe<Measurement>>>;
   ping: Scalars['String']['output'];
   plant?: Maybe<Plant>;
   plants: Array<Maybe<Plant>>;
@@ -146,6 +165,11 @@ export type Query = {
 
 export type QueryCheckPairingProcessArgs = {
   pairingCode: Scalars['String']['input'];
+};
+
+
+export type QueryGetMeasurementsArgs = {
+  getMeasurementsInput?: InputMaybe<GetMeasurementsInput>;
 };
 
 
@@ -189,7 +213,14 @@ export type RoomPlantInput = {
 };
 
 export type UpdatePlantInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  imageUrl?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   plantId?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateRoomInput = {
+  name: Scalars['String']['input'];
+  roomId: Scalars['String']['input'];
 };

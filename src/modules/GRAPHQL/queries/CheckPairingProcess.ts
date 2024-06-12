@@ -5,6 +5,7 @@ export const CHECK_PAIRING_PROCESS = gql`
     checkPairingProcess(pairingCode: $pairingCode) {
       userPaired
       serverPaired
+      plantId
     }
   }
 `;

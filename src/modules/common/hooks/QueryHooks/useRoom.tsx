@@ -17,9 +17,11 @@ export const useRoom = (roomId: string | number): IUseRoomHook => {
     fetchPolicy: "cache-and-network",
 
     context: { shouldTrackStatus: true },
-    variables: { getEventByIdId: roomId },
+    variables: { roomId },
+    skip: !roomId,
     onCompleted(data) {
       if (!data.room) return;
+      console.log(data);
       setRoom(data.room as unknown as IRoom);
     },
   });

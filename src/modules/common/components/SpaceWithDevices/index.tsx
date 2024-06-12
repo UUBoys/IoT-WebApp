@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { MultiStepLoader } from "../MultiStepLoader";
 import { useCheckPairingProccess } from "../../hooks/QueryHooks/useCheckPairingProcess";
+import { useAddPlantsToRoom } from "../../hooks/MutationHooks/useAddPlantToRoom";
 
 interface IRoomWithPlantsProps {
   room: IRoom;
@@ -25,10 +26,13 @@ interface IRoomWithPlantsProps {
 }
 const loadingStates = [
   {
-    text: "Navazuji spojení s rostlinou",
+    text: "Vytvářím virtuální rostlinu",
   },
   {
-    text: "Připojuji zařízení k síti",
+    text: "Navazuji spojení s reálnou rostlinou",
+  },
+  {
+    text: "Připojuji zařízení k systému",
   },
   {
     text: "Probíhá synchronizace dat",
@@ -37,13 +41,10 @@ const loadingStates = [
     text: "Kontroluji stav připojení",
   },
   {
-    text: "Zajišťuji stabilní spojení",
-  },
-  {
     text: "Probíhá inicializace systému",
   },
   {
-    text: "Hledám dostupné sítě",
+    text: "Přidávám rostlinu do místnosti",
   },
   {
     text: "Připravuji zařízení k provozu",
@@ -65,12 +66,16 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
     closeModal: s.closeModal,
   }));
   const { pairPlantAsync } = usePairPlant();
+  const { addPlantsToRoomAsync } = useAddPlantsToRoom();
   const {
     isPaired,
     setPairingCode,
     error,
     loading: isPairedLoading,
-  } = useCheckPairingProccess();
+  } = useCheckPairingProccess(async (plantId) => {
+    await addPlantsToRoomAsync(id, [plantId]);
+    refetchRooms && refetchRooms();
+  });
 
   useEffect(() => {
     if (error) {
@@ -113,7 +118,8 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
     <div
       className={clsx(
         className,
-        " h-full w-full p-4 bg-white rounded-lg shadow-xl"
+        !isPairedLoading && "hover:shadow-2xl hover:scale-[1.01]",
+        " h-full w-full p-4 bg-white rounded-lg  transition-all cursor-pointer shadow-lg"
       )}
     >
       <MultiStepLoader
@@ -121,21 +127,26 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
         loading={isPairedLoading}
         duration={2000}
       />
-      <div className="flex w-full flex-col  h-full flex-1 gap-2">
+      <div
+        onClick={() => {
+          push(`/room/${id}`);
+        }}
+        className="flex w-full flex-col  h-full flex-1 gap-2"
+      >
         <div
           className={
             "flex-1 w-full flex flex-row justify-between items-center gap-2"
           }
         >
-          <h1
-            className="text-xl text-black font-bold cursor-pointer"
-            onClick={() => push(`/room/${id}}`)}
-          >
+          <h1 className="text-xl text-black font-bold cursor-pointer">
             {name}
           </h1>
           <AddToQueueIcon
             className={"text-primary-500 cursor-pointer relative z-[20]"}
-            onClick={openEditAppModal}
+            onClick={(e) => {
+              e.stopPropagation();
+              openEditAppModal();
+            }}
           />
         </div>
         <p className={"text-sm text-gray-400"}>
