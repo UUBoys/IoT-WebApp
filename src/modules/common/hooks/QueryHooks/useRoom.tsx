@@ -21,6 +21,7 @@ export const useRoom = (roomId: string | number): IUseRoomHook => {
     skip: !roomId,
     onCompleted(data) {
       if (!data.room) return;
+      console.log(data);
       setRoom(data.room as unknown as IRoom);
     },
   });

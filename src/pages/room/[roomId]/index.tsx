@@ -11,6 +11,7 @@ import { useModalStore } from "@/modules/common/stores/modal-store";
 import EditRoomModal, {
   IEditRoomValues,
 } from "@/modules/common/modals/EditRoomModal";
+import SendIcon from "@mui/icons-material/Send";
 
 const RoomDetail = () => {
   const { query, push } = useRouter();
@@ -40,6 +41,13 @@ const RoomDetail = () => {
           defaultError={defaultError}
         />
       ),
+    });
+  };
+  console.log(room);
+  const openInviteCodeModal = () => {
+    openModal({
+      isClosable: false,
+      content: <div></div>,
     });
   };
   const renderDeviceBlock = (
@@ -94,6 +102,17 @@ const RoomDetail = () => {
 
         <div className="flex flex-col md:flex-row gap-3">
           {" "}
+          <Button
+            className=" !h-12 !px-3 text-lg "
+            size="md"
+            color="secondary"
+            onClick={openEditRoomModal}
+          >
+            <div className="flex items-center justify-between !gap-2 ">
+              <SendIcon className="h-5 w-5" />
+              Pozvat uživatele
+            </div>
+          </Button>
           <Button
             className=" !h-12 !px-3 text-lg "
             size="md"
