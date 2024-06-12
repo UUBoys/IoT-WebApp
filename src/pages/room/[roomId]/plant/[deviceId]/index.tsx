@@ -188,7 +188,7 @@ const DeviceDetail = () => {
         </div>
         <div
           className={
-            "h-full w-full bg-gray-800 flex flex-col gap-3 rounded-md justify-center relative"
+            "h-full w-full bg-gray-800 flex flex-col gap-3 rounded-md justify-center relative shadow-xl"
           }
         >
           <Image
