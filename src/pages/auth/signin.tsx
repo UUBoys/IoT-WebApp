@@ -12,11 +12,14 @@ import { lazy, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-const Lottie = lazy(() => import("lottie-react"));
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
 
 import qUpLoaderAnimation from "../../../public/animations/loader-animation.json";
 
 import Loader from "@/modules/common/components/Loader";
+import dynamic from "next/dynamic";
 
 type LoginValues = {
   email: string;
