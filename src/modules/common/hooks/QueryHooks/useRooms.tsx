@@ -19,12 +19,10 @@ export const useRooms = (): IUseRoomsHook => {
 
   useEffect(() => {
     if (data && data.rooms) {
-      // Filter out any null or undefined values and cast them to IRoom
       const filteredRooms: IRoom[] = data.rooms.filter(
         (room): room is IRoom => room !== null && room !== undefined
       );
 
-      // Remove duplicates
       const uniqueRooms = filteredRooms.reduce((acc: IRoom[], room: IRoom) => {
         if (!acc.find((r) => r.id === room.id)) {
           acc.push(room);
