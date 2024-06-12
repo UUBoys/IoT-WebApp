@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { MultiStepLoader } from "../MultiStepLoader";
 import { useCheckPairingProccess } from "../../hooks/QueryHooks/useCheckPairingProcess";
+import { useAddPlantsToRoom } from "../../hooks/MutationHooks/useAddPlantToRoom";
 
 interface IRoomWithPlantsProps {
   room: IRoom;
@@ -65,12 +66,15 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
     closeModal: s.closeModal,
   }));
   const { pairPlantAsync } = usePairPlant();
+  const { addPlantsToRoomAsync } = useAddPlantsToRoom();
   const {
     isPaired,
     setPairingCode,
     error,
     loading: isPairedLoading,
-  } = useCheckPairingProccess();
+  } = useCheckPairingProccess((plantId) => {
+    addPlantsToRoomAsync(id, [plantId]);
+  });
 
   useEffect(() => {
     if (error) {
