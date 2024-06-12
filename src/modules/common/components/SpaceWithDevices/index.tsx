@@ -1,4 +1,5 @@
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddToQueueIcon from "@mui/icons-material/AddToQueue";
 import clsx from "clsx";
 import { useState } from "react";
 
@@ -13,6 +14,7 @@ import { uuid } from "@/modules/helpers/general";
 import { IRoom } from "@/modules/utils/schemas/room";
 import { usePairPlant } from "../../hooks/MutationHooks/usePairPlant";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 interface IRoomWithPlantsProps {
   room: IRoom;
@@ -21,12 +23,13 @@ interface IRoomWithPlantsProps {
 }
 
 const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
-  room: { plants: devices, name },
+  room: { plants: devices, name, id },
   refetchRooms,
   className = "",
 }) => {
-  console.log("RoomWithPlants", devices);
+  // console.log("RoomWithPlants", devices);
   const [defaultError, setDefaultError] = useState("");
+  const { push } = useRouter();
   const { openModal, closeModal } = useModalStore((s) => ({
     openModal: s.openModal,
     closeModal: s.closeModal,
@@ -59,26 +62,48 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
   };
 
   return (
-    <div className={clsx(className, " h-full w-full pt-10")}>
-      <div className="flex w-full justify-between">
-        <h1 className="text-4xl text-gray-100">{name}</h1>
-        <Button
-          color="primary"
-          className=" !h-12 bg-gray-700 !px-3 text-lg "
-          size="md"
-          onClick={openEditAppModal}
+    <div
+      className={clsx(
+        className,
+        " h-full w-full p-4 bg-white rounded-lg shadow-xl"
+      )}
+    >
+      <div className="flex w-full flex-col  h-full flex-1 gap-2">
+        <div
+          className={"flex-1 w-full flex flex-row justify-between items-center"}
         >
-          <div className="flex items-center justify-between !gap-2 ">
-            <AddCircleOutlineIcon className="h-5 w-5" />
-            Přidat zařízení do prostoru
-          </div>
-        </Button>
+          <h1
+            className="text-xl text-black font-bold cursor-pointer"
+            onClick={() => push(`/room/${id}}`)}
+          >
+            {name}
+          </h1>
+          <AddToQueueIcon
+            className={"text-primary-500 cursor-pointer relative z-[20]"}
+            onClick={openEditAppModal}
+          />
+        </div>
+        <p className={"text-sm text-gray-400"}>
+          Počet zařízení <span className={"font-bold"}>{devices.length}</span>
+        </p>
+
+        {/*<Button*/}
+        {/*  color="primary"*/}
+        {/*  className="!h-10 bg-gray-700 !px-3 text-sm w-fit mt-3"*/}
+        {/*  size="md"*/}
+        {/*  onClick={openEditAppModal}*/}
+        {/*>*/}
+        {/*  <div className="flex items-center !gap-2 ">*/}
+        {/*    <AddCircleOutlineIcon className="h-5 w-5" />*/}
+        {/*    Přidat zařízení*/}
+        {/*  </div>*/}
+        {/*</Button>*/}
       </div>
-      <div className="flex flex-wrap gap-10 pt-10">
-        {devices.map((device) => (
-          <DeviceCard key={uuid()} className="min-w-[350px]" device={device} />
-        ))}
-      </div>
+      {/*<div className="flex flex-wrap gap-10 pt-4">*/}
+      {/*  {devices.map((device) => (*/}
+      {/*    <DeviceCard key={uuid()} className="min-w-[350px]" device={device} />*/}
+      {/*  ))}*/}
+      {/*</div>*/}
     </div>
   );
 };

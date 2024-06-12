@@ -21,17 +21,16 @@ const CreateNewRoomModal: React.FC<ICreateNewRoomModalProps> = ({
   const { register, handleSubmit } = useForm<ICreateNewRoomValues>();
 
   return (
-    <div className="flex w-full flex-col items-center gap-32  align-top">
-      <div className="flex  w-full flex-col items-start rounded-lg bg-gray-700 text-center  shadow-xl">
+    <div className="flex w-full flex-col items-center  align-top">
+      <div className="flex  w-full flex-col items-start rounded-lg bg-white text-center  shadow-xl">
         <form
           onSubmit={handleSubmit(createNewRoom)}
-          className="flex w-full flex-col gap-5 p-10 pb-20"
+          className="flex w-full flex-col gap-5 p-10"
         >
-          <h1 className="text-3xl font-bold text-white">
+          <h1 className="text-3xl font-bold text-black">
             Vytvořit novou místnost
           </h1>
           <div className="space-y-4 text-start md:space-y-6">
-            {" "}
             <div>
               <label
                 htmlFor="name"
@@ -44,7 +43,7 @@ const CreateNewRoomModal: React.FC<ICreateNewRoomModalProps> = ({
                 id="name"
                 {...register("name")}
                 placeholder="Název zařízení"
-                className="!focus:ring-blue-500 !focus:border-blue-500 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white !placeholder-gray-400 focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
               />
             </div>
             {defaultError !== "" && (
@@ -52,9 +51,9 @@ const CreateNewRoomModal: React.FC<ICreateNewRoomModalProps> = ({
             )}
           </div>
 
-          <div className="flex w-full items-center justify-center gap-6">
+          <div className="flex w-full items-center justify-end gap-6 mt-[30px]">
             <div className="flex gap-5 text-end">
-              <Button type="submit" size="lg" className="w-20 !bg-green-500">
+              <Button type="submit" size="lg" className="w-20">
                 Vytvořit
               </Button>
             </div>
@@ -63,6 +62,7 @@ const CreateNewRoomModal: React.FC<ICreateNewRoomModalProps> = ({
                 onClick={closeModal}
                 type="button"
                 size="lg"
+                color="danger"
                 className="w-20"
               >
                 Zrušit

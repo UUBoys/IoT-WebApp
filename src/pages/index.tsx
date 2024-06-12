@@ -50,7 +50,7 @@ const Home: NextPage = () => {
     <div className="min-h-screen w-full sm:p-10">
       <div className="flex w-full justify-end">
         <Button
-          className=" !h-12 !bg-green-600 !px-3 text-lg "
+          className=" !h-12 !bg-success-600 !px-3 text-lg "
           size="md"
           onClick={openEditAppModal}
         >
@@ -60,9 +60,19 @@ const Home: NextPage = () => {
           </div>
         </Button>
       </div>
-      {rooms.map((room) => (
-        <RoomWithPlants refetchRooms={refetchRooms} key={room.id} room={room} />
-      ))}
+      <div
+        className={
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 w-full mt-[30px]"
+        }
+      >
+        {rooms.map((room) => (
+          <RoomWithPlants
+            refetchRooms={refetchRooms}
+            key={room.id}
+            room={room}
+          />
+        ))}
+      </div>
       {rooms.length === 0 && (
         <div className="flex w-full justify-center items-center h-[80vh]">
           <h1 className="text-4xl text-gray-100">Nemáte žádné místnosti😔💔</h1>

@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31043ecd-d487-4276-9447-4b31e6695263" name="Changes" comment="" />
+    <list default="true" id="31043ecd-d487-4276-9447-4b31e6695263" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/room/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/common/components/NavBar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/components/NavBar/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/common/components/SpaceWithDevices/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/components/SpaceWithDevices/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/common/modals/AddNewDeviceModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/modals/AddNewDeviceModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/common/modals/CreateNewRoomModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/modals/CreateNewRoomModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +23,29 @@
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="dev" />
+                    <option name="lastUsedInstant" value="1718180386" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1718180385" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -30,7 +61,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/dannyseiner/Projects/Unicorn/IoT-WebApp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
