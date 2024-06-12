@@ -23,7 +23,6 @@ export const usePlant = (
     skip: !plantId,
     onCompleted(data) {
       if (!data.plant) return;
-      console.log(data);
       setPlant(data.plant as unknown as IPlant);
     },
   });

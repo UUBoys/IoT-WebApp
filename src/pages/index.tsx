@@ -22,7 +22,6 @@ const Home: NextPage = () => {
 
   const { createRoomAsync } = useCreateRoom();
   const { rooms, refetchRooms } = useRooms();
-  console.log(rooms);
   const createNewRoom = async (deviceValues: ICreateNewRoomValues) => {
     try {
       await createRoomAsync(deviceValues.name);

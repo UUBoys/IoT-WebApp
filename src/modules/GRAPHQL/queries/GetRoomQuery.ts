@@ -9,8 +9,10 @@ export const GET_ROOM = gql`
       plants {
         id
         type
+        isOnline
         name
         imageUrl
+        description
         lastHeartbeat
         measurements {
           id

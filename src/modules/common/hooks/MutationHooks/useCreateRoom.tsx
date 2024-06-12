@@ -11,7 +11,7 @@ export const useCreateRoom = (): ICreateRoomHook => {
   const [createRoom] = useMutation<Mutation>(CREATE_ROOM_MUTATION, {
     context: { shouldTrackStatus: true, withConfirmation: true },
     onCompleted: (data) => {
-      if (!data.updateRoom) return;
+      if (!data.createRoom) return;
       console.log(data);
     },
   });
@@ -24,7 +24,6 @@ export const useCreateRoom = (): ICreateRoomHook => {
       },
     };
 
-    console.log(variables);
     return createRoom({
       variables,
     });

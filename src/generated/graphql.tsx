@@ -154,6 +154,7 @@ export type Query = {
   __typename?: 'Query';
   checkPairingProcess: CheckPairingProcessResponse;
   getMeasurements?: Maybe<Array<Maybe<Measurement>>>;
+  getPlantTypes: Array<Maybe<Scalars['String']['output']>>;
   ping: Scalars['String']['output'];
   plant?: Maybe<Plant>;
   plants: Array<Maybe<Plant>>;
