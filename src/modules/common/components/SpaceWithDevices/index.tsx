@@ -61,7 +61,7 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
   return (
     <div className={clsx(className, " h-full w-full pt-10")}>
       <div className="flex w-full justify-between">
-        <h1 className="text-4xl text-gray-100">{name}</h1>
+        <h1 className="text-4xl text-black">{name}</h1>
         <Button
           color="primary"
           className=" !h-12 bg-gray-700 !px-3 text-lg "

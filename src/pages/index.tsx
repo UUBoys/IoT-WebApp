@@ -50,7 +50,7 @@ const Home: NextPage = () => {
     <div className="min-h-screen w-full sm:p-10">
       <div className="flex w-full justify-end">
         <Button
-          className=" !h-12 !bg-green-600 !px-3 text-lg "
+          className=" !h-12 !bg-success-600 !px-3 text-lg "
           size="md"
           onClick={openEditAppModal}
         >

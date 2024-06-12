@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
-import { lazy, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
