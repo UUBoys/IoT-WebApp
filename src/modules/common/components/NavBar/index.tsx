@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
               >
                 <span className="sr-only">Open sidebar</span>
                 <svg
-                  className="h-6 w-5 "
+                  className="h-6 w-6 "
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="w-6 h-6 max-w-6 max-h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-6 max-w-6 max-h-6"
                 >
                   <path
                     strokeLinecap="round"

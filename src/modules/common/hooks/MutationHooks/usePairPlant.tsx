@@ -13,7 +13,7 @@ interface IUserPairPlantHook {
 
 export const usePairPlant = (): IUserPairPlantHook => {
   const [pairPlant] = useMutation<Mutation>(PAIR_PLANT_MUTATION, {
-    context: { shouldTrackStatus: true, withConfirmation: true },
+    context: { shouldTrackStatus: false, withConfirmation: false },
     onCompleted: (data) => {
       if (!data.pairPlant) return;
       console.log(data);

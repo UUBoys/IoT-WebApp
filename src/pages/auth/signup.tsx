@@ -73,8 +73,8 @@ const SignUp: React.FC = () => {
   }, [router, session?.accessToken]);
 
   return (
-    <div className="flex h-screen w-full items-center bg-gray-100">
-      <section className="w-full bg-gray-700 bg-opacity-60 bg-[url('/images/register-wallpaper.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
+    <div className="flex h-screen w-full items-center bg-white">
+      <section className="w-full bg-white bg-opacity-60 bg-[url('/images/register-wallpaper.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
         <div className="pt:mt-0 mx-auto flex w-full flex-col items-center justify-center px-6 py-8 md:h-screen">
           <a
             href="#"
@@ -83,9 +83,9 @@ const SignUp: React.FC = () => {
             <img className="mr-2 h-14" src="/images/logo.png" alt="logo" />
             PotFriend
           </a>
-          <div className="w-full rounded-lg !bg-gray-800 shadow sm:max-w-md md:mt-0 xl:p-0">
+          <div className="w-full rounded-lg !bg-white shadow sm:max-w-md md:mt-0 xl:p-0">
             <div className="space-y-4 p-6 sm:p-8 md:space-y-6 lg:space-y-8">
-              <h2 className="text-center text-xl font-bold leading-tight tracking-tight !text-white md:text-2xl">
+              <h2 className="text-center text-xl font-bold leading-tight tracking-tight !text-black md:text-2xl">
                 {t("pages.auth.register.header")}
               </h2>
               <form
@@ -102,7 +102,7 @@ const SignUp: React.FC = () => {
                   )}
                   <label
                     htmlFor="name"
-                    className="mb-2 block text-sm font-medium !text-white"
+                    className="mb-2 block text-sm font-medium !text-gray-300"
                   >
                     Jméno
                   </label>
@@ -110,7 +110,7 @@ const SignUp: React.FC = () => {
                     type="text"
                     {...register("username")}
                     id="name"
-                    className="!placeholder:text-gray-400 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                    className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
                     placeholder="Jméno"
                   />
                 </div>
@@ -123,7 +123,7 @@ const SignUp: React.FC = () => {
                   )}
                   <label
                     htmlFor="email"
-                    className="mb-2 block text-sm font-medium !text-white"
+                    className="mb-2 block text-sm font-medium !text-gray-300"
                   >
                     Your email
                   </label>
@@ -131,7 +131,7 @@ const SignUp: React.FC = () => {
                     type="email"
                     {...register("email")}
                     id="email"
-                    className="!placeholder:text-gray-400 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                    className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
                     placeholder="name@company.com"
                   />
                 </div>
@@ -143,7 +143,7 @@ const SignUp: React.FC = () => {
                   )}
                   <label
                     htmlFor="password"
-                    className="mb-2 block text-sm font-medium !text-white"
+                    className="mb-2 block text-sm font-medium !text-gray-300"
                   >
                     Password
                   </label>
@@ -152,14 +152,14 @@ const SignUp: React.FC = () => {
                     {...register("password")}
                     id="password"
                     placeholder="••••••••"
-                    className="!placeholder:text-gray-400 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                    className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="confirm-password"
-                    className="mb-2 block text-sm font-medium !text-white"
+                    className="mb-2 block text-sm font-medium !text-gray-300"
                   >
                     Confirm password
                   </label>
@@ -168,7 +168,7 @@ const SignUp: React.FC = () => {
                     {...register("passwordCheck")}
                     id="confirm-password"
                     placeholder="••••••••"
-                    className="!placeholder:text-gray-400 block w-full rounded-lg border !border-gray-600 !bg-gray-700 p-2.5 !text-white focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
+                    className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
                   />
                 </div>
                 {defaultError !== "" && (

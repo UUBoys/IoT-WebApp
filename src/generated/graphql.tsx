@@ -30,6 +30,12 @@ export type AuthResult = {
   token: Scalars['String']['output'];
 };
 
+export type CheckPairingProcessResponse = {
+  __typename?: 'CheckPairingProcessResponse';
+  serverPaired: Scalars['Boolean']['output'];
+  userPaired: Scalars['Boolean']['output'];
+};
+
 export type CreateRoomInput = {
   name: Scalars['String']['input'];
   plants?: InputMaybe<Array<InputMaybe<RoomPlantInput>>>;
@@ -129,11 +135,17 @@ export type Plant = {
 
 export type Query = {
   __typename?: 'Query';
+  checkPairingProcess: CheckPairingProcessResponse;
   ping: Scalars['String']['output'];
   plant?: Maybe<Plant>;
   plants: Array<Maybe<Plant>>;
   room?: Maybe<Room>;
   rooms?: Maybe<Array<Maybe<Room>>>;
+};
+
+
+export type QueryCheckPairingProcessArgs = {
+  pairingCode: Scalars['String']['input'];
 };
 
 

@@ -76,10 +76,10 @@ export const SignIn = () => {
           </div>
         </Loader>
       )}
-      <section className="min-h-[100vh]  bg-gray-900">
+      <section className="min-h-[100vh]">
         <div className="mx-auto grid min-h-[100vh] max-w-screen-xl px-4 py-8 lg:grid-cols-12 lg:gap-20 lg:py-16">
           <div className="w-full place-self-center lg:col-span-6">
-            <div className="mx-auto rounded-lg  bg-gray-800 p-6 shadow sm:max-w-xl sm:p-8">
+            <div className="mx-auto rounded-lg  bg-white p-6 shadow sm:max-w-xl sm:p-8">
               <a
                 href="#"
                 className="mb-4 inline-flex items-center text-xl font-semibold text-white"
@@ -87,10 +87,10 @@ export const SignIn = () => {
                 <img className="mr-2 h-14" src="/images/logo.png" alt="logo" />
                 PotFriend
               </a>
-              <h1 className="mb-2 text-2xl font-bold leading-tight tracking-tight text-white">
+              <h1 className="mb-2 text-2xl font-bold leading-tight tracking-tight text-black">
                 Vítejte zpět!
               </h1>{" "}
-              <p className="text-sm font-light text-gray-300">
+              <p className="text-sm font-light text-gray-400">
                 Ještě nemáte účet?{" "}
                 <Link
                   href="/auth/signup"
@@ -122,7 +122,7 @@ export const SignIn = () => {
                       type="email"
                       id="email"
                       {...register("email")}
-                      className=" order-gray-600 block w-full  rounded-lg border bg-gray-700 p-2.5 text-white placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
                       placeholder={t("pages.auth.form.email.placeholder")}
                     />
                   </div>
@@ -139,14 +139,14 @@ export const SignIn = () => {
                       name="password"
                       id="password"
                       placeholder={t("pages.auth.form.password.placeholder")}
-                      className=" order-gray-600 block w-full  rounded-lg border bg-gray-700 p-2.5 text-white placeholder:text-gray-400 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
                     />
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <div className="h-0.5 w-full bg-gray-700" />
+                  <div className="h-0.5 w-full bg-background-100" />
                   <div className="px-5 text-center text-gray-400">or</div>
-                  <div className="h-0.5 w-full bg-gray-700" />
+                  <div className="h-0.5 w-full bg-background-100" />
                 </div>
                 <div className="space-y-3">
                   <a

@@ -15,6 +15,7 @@ export const useRoom = (roomId: string | number): IUseRoomHook => {
 
   const { refetch } = useQuery<Query>(GET_ROOM, {
     fetchPolicy: "cache-and-network",
+
     context: { shouldTrackStatus: true },
     variables: { getEventByIdId: roomId },
     onCompleted(data) {
