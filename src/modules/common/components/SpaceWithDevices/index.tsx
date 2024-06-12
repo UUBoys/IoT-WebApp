@@ -117,7 +117,7 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
     <div
       className={clsx(
         className,
-        " h-full w-full p-4 bg-white rounded-lg shadow-xl"
+        " h-full w-full p-4 bg-white rounded-lg hover:shadow-2xl hover:scale-[1.01] transition-all cursor-pointer shadow-lg"
       )}
     >
       <MultiStepLoader

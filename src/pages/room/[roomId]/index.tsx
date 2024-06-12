@@ -15,7 +15,7 @@ const RoomDetail = () => {
     return (
       <div
         onClick={() => {
-          push(`${room}/plant/${plant.id}`);
+          push(`${query.roomId}/plant/${plant.id}`);
         }}
         className={"relative bg-transparent cursor-pointer mt-[20px]"}
       >

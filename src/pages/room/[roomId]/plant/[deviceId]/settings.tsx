@@ -29,7 +29,11 @@ const Settings = () => {
     >
       <div className={"bg-gray-800 p-6 rounded-md w-[90%] max-w-[500px]"}>
         <div className={"flex flex-row gap-2"}>
-          <UndoIcon onClick={() => push(`/device/${query.id}/detail`)} />
+          <UndoIcon
+            onClick={() =>
+              push(`/room/${query.roomId}/plant/${query.deviceId}`)
+            }
+          />
           <p className={"text-xl font-bold"}>Device Name</p>
         </div>
         <div className={"flex flex-col gap-4 mt-8"}>

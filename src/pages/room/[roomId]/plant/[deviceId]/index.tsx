@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { WobbleCard } from "@/modules/common/components/WobbleCard";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -25,6 +26,7 @@ ChartJS.register(
 
 const DeviceDetail = () => {
   const { push, query } = useRouter();
+  console.log(query);
   const widgetClasses =
     "h-full w-full bg-gray-800 flex flex-col gap-3 p-4 rounded-md justify-center";
 
@@ -102,14 +104,15 @@ const DeviceDetail = () => {
   return (
     <div className={"px-6 mt-10 flex flex-col gap-10"}>
       <div className={"grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-10"}>
-        <div
+        <WobbleCard
+          containerClassName="col-span-1 lg:col-span-1 h-full bg-pink-800 min-h-[100px] lg:min-h-[300px]"
           className={
             "h-full w-full flex flex-col gap-10 rounded-md justify-center"
           }
         >
           <div
             className={
-              " w-full bg-gray-800 flex flex-col gap-3 p-4 rounded-md  h-full"
+              " w-full z-50 bg-gray-800 flex flex-col gap-3 p-4 rounded-md  h-full"
             }
           >
             <div className={"flex flex-row justify-between items-center"}>
@@ -117,7 +120,11 @@ const DeviceDetail = () => {
               <div className={"flex flex-row gap-3 items-center"}>
                 <div className={"bg-lime-500 px-3 py-2 rounded-md"}>Online</div>
                 <SettingsIcon
-                  onClick={() => push(`/device/${query.id}/settings`)}
+                  onClick={() =>
+                    push(
+                      `/room/${query.roomId}/plant/${query.deviceId}/settings`
+                    )
+                  }
                 />
               </div>
             </div>
@@ -168,8 +175,9 @@ const DeviceDetail = () => {
               Settings
             </div>
           </div>
-        </div>
-        <div
+        </WobbleCard>
+        <WobbleCard
+          containerClassName="col-span-1 lg:col-span-1 h-full bg-pink-800 min-h-[100px] lg:min-h-[300px]"
           className={
             "h-full w-full bg-gray-800 flex flex-col gap-3 rounded-md justify-center relative"
           }
@@ -180,16 +188,17 @@ const DeviceDetail = () => {
             }
             className={"rounded-md"}
             alt={"plant-image"}
-            fill
+            width={200}
+            height={200}
           />
-        </div>
-        <div className={widgetClasses}>
+        </WobbleCard>
+        <WobbleCard className={widgetClasses}>
           <h1 className={"font-bold text-xl"}>Water level</h1>
           <Doughnut data={data} options={options} />
           <p className={"text-gray-500 text-center"}>
             Last update: 21 minutes ago
           </p>
-        </div>
+        </WobbleCard>
       </div>
 
       <div className={"w-full bg-gray-800 p-3 rounded-md"}>
