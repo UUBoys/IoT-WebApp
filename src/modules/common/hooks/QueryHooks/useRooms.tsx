@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 
-import { Query } from "@/generated/graphql";
+import { Query, Room } from "@/generated/graphql";
 import { GET_ROOMS } from "@/modules/GRAPHQL/queries/GetRoomsQuery";
 import { IRoom } from "@/modules/utils/schemas/room";
 
@@ -19,13 +19,20 @@ export const useRooms = (): IUseRoomsHook => {
 
   useEffect(() => {
     if (data && data.rooms) {
-      const uniqueRooms = data.rooms.reduce((acc: IRoom[], room: IRoom) => {
+      // Filter out any null or undefined values and cast them to IRoom
+      const filteredRooms: IRoom[] = data.rooms.filter(
+        (room): room is IRoom => room !== null && room !== undefined
+      );
+
+      // Remove duplicates
+      const uniqueRooms = filteredRooms.reduce((acc: IRoom[], room: IRoom) => {
         if (!acc.find((r) => r.id === room.id)) {
           acc.push(room);
         }
         return acc;
       }, []);
-      if (uniqueRooms) setRooms(uniqueRooms);
+
+      setRooms(uniqueRooms);
     }
   }, [data]);
 
