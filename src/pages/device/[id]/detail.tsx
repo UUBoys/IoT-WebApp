@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Doughnut, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,

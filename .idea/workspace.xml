@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31043ecd-d487-4276-9447-4b31e6695263" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/room/[id].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/common/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/Layout/Layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/common/components/NavBar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/components/NavBar/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/common/components/SpaceWithDevices/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/components/SpaceWithDevices/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/common/modals/AddNewDeviceModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/modals/AddNewDeviceModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/common/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/common/modals/CreateNewRoomModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/common/modals/CreateNewRoomModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

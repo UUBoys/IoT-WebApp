@@ -60,7 +60,7 @@ const AddNewDeviceModal: React.FC<IAddNewDeviceModalProps> = ({
                 rows={5}
                 {...register("description")}
                 placeholder="Popis zařízení"
-                className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none"
+                className=" block w-full rounded-lg border border-background-100 !bg-background-50 p-2.5 !text-black !placeholder-gray-400 focus:!bg-white sm:text-sm outline-none focus:outline-none resize-none"
               />
             </div>
             <div>

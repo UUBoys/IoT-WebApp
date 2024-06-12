@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
                 aria-controls="logo-sidebar"
                 type="button"
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                className="!focus:ring-gray-600 ocus:outline-none inline-flex items-center rounded-lg p-2 text-sm !text-primary-500 hover:!bg-secondary-200"
+                className="inline-flex items-center rounded-lg p-2 text-sm !text-primary-500 hover:!bg-secondary-200 hover:!text-white transition-all"
               >
                 <span className="sr-only">Open sidebar</span>
                 <svg
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
         id="logo-sidebar"
         className={clsx(
           isSidebarOpen && "!w-64",
-          "fixed left-0 top-0 z-40 h-screen w-0 overflow-hidden border-r !border-background-100 !bg-white pt-16 transition-all sm:translate-x-0 md:w-16"
+          "fixed left-0 top-0 z-40 h-screen w-0 overflow-hidden border-r !border-background-100 !bg-white pt-16 transition-all sm:translate-x-0 md:w-16 "
         )}
         aria-label="Sidebar"
       >
@@ -66,8 +66,8 @@ const Navbar: React.FC = () => {
               <Link
                 href="/"
                 className={clsx(
-                  pathname === "/" && "!bg-primary-500",
-                  " text-nowrap group flex flex-nowrap items-center rounded-lg p-2 !text-white hover:!bg-secondary-300 "
+                  pathname === "/" && "!bg-primary-500 !text-white",
+                  " text-nowrap group flex flex-nowrap items-center rounded-lg p-2 text-common-400 hover:!bg-secondary-300 hover:!text-white transition-all "
                 )}
               >
                 <svg
@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
             <li>
               <button
                 onClick={() => signOut()}
-                className="text-nowrap group flex w-full flex-nowrap items-center rounded-lg p-2   text-red-500 hover:!bg-secondary-300"
+                className="text-nowrap group flex w-full flex-nowrap items-center rounded-lg p-2  text-red-500 hover:!bg-danger-500 hover:!text-white transition-all"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
