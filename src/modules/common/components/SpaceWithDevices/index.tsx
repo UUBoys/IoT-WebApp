@@ -126,8 +126,7 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
         duration={2000}
       />
       <div
-        onClick={(e) => {
-          e.preventDefault();
+        onClick={() => {
           push(`/room/${id}`);
         }}
         className="flex w-full flex-col  h-full flex-1 gap-2"
@@ -142,7 +141,10 @@ const RoomWithPlants: React.FC<IRoomWithPlantsProps> = ({
           </h1>
           <AddToQueueIcon
             className={"text-primary-500 cursor-pointer relative z-[20]"}
-            onClick={openEditAppModal}
+            onClick={(e) => {
+              e.stopPropagation();
+              openEditAppModal();
+            }}
           />
         </div>
         <p className={"text-sm text-gray-400"}>

@@ -55,7 +55,7 @@ export const useCheckPairingProccess = (
     if (loading && loadingStartTime !== null) {
       const timeoutHandler = setTimeout(
         () => {
-          if (Date.now() - loadingStartTime >= 15000) {
+          if (Date.now() - loadingStartTime >= 120000) {
             setError("Timeout");
             setLoading(false);
           }
