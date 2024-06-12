@@ -227,7 +227,7 @@ const DeviceDetail = () => {
         </div>
       </div>
 
-      <div className={"w-full bg-white p-3 rounded-md"}>
+      <div className={"w-full bg-white p-3 rounded-md shadow-xl"}>
         <Bar data={lineData} options={barOptions} />
       </div>
     </div>
