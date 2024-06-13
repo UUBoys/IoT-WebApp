@@ -1,43 +1,38 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-
 "use client";
 
-// import Lottie from "lottie-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import dynamic from "next/dynamic";
+import qUpLoaderAnimation from "../../../public/animations/loader-animation.json";
+import Loader from "@/modules/common/components/Loader";
 
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
 });
-
-import qUpLoaderAnimation from "../../../public/animations/loader-animation.json";
-
-import Loader from "@/modules/common/components/Loader";
-import dynamic from "next/dynamic";
 
 type LoginValues = {
   email: string;
   password: string;
 };
 
-export const SignIn = () => {
+const SignIn: React.FC = () => {
   const { register, handleSubmit } = useForm<LoginValues>();
-  const [isLogingIn, setIsLogingIn] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const { t } = useTranslation();
   const [defaultError, setDefaultError] = useState("");
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const inviteToken = router.query.inviteToken as string;
+
   const handleStudentCredentialsLogin = async ({
     email,
     password,
   }: LoginValues) => {
-    setIsLogingIn(true);
+    setIsLoggingIn(true);
     const res = await signIn("credentials", {
       email,
       password,
@@ -45,25 +40,31 @@ export const SignIn = () => {
     });
     if (res?.error) {
       setDefaultError(res.error);
-      setIsLogingIn(false);
+      setIsLoggingIn(false);
     } else if (res?.url) {
-      const url = new URL(res?.url);
-      const redirectUrl = url.searchParams.get("callbackUrl");
-      console.log(redirectUrl);
-      router.push(redirectUrl || res.url);
-      return;
+      const url = new URL(res.url);
+      if (inviteToken) {
+        router.push(`/joinRoom/acceptInvite/${inviteToken}`);
+      } else {
+        const redirectUrl = url.searchParams.get("callbackUrl");
+        router.push(redirectUrl || res.url);
+      }
     }
-
-    setIsLogingIn(false);
   };
 
   useEffect(() => {
-    if (session?.accessToken) router.push("/");
-  }, [router, session?.accessToken]);
-
+    if (status === "loading") return; // Wait until session is fully loaded
+    if (session?.user) {
+      if (inviteToken) {
+        router.push(`/joinRoom/acceptInvite/${inviteToken}`);
+      } else {
+        router.push("/"); // Default redirect if already logged in
+      }
+    }
+  }, [inviteToken, router, session?.user, status]);
   return (
     <div className="min-h-[100vh]">
-      {isLogingIn && (
+      {isLoggingIn && (
         <Loader>
           {" "}
           <Lottie

@@ -8,12 +8,13 @@ import { GET_ROOM } from "@/modules/GRAPHQL/queries/GetRoomQuery";
 interface IUseRoomHook {
   room: IRoom | null;
   refetchRoom: () => void;
+  isRoomLoading: boolean;
 }
 
 export const useRoom = (roomId: string | number): IUseRoomHook => {
   const [room, setRoom] = useState<IRoom | null>(null);
 
-  const { data, refetch } = useQuery<Query>(GET_ROOM, {
+  const { data, refetch, loading } = useQuery<Query>(GET_ROOM, {
     fetchPolicy: "cache-and-network",
 
     context: { shouldTrackStatus: true },
@@ -29,5 +30,6 @@ export const useRoom = (roomId: string | number): IUseRoomHook => {
   return {
     room,
     refetchRoom: refetch,
+    isRoomLoading: loading,
   };
 };
