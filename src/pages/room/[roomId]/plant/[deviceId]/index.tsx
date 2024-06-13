@@ -73,6 +73,14 @@ const DeviceDetail = () => {
     ? plant.measurements[plant.measurements.length - 1]
     : null;
 
+  const diagramColor = latestPlantMeasurement
+    ? latestPlantMeasurement.value > 20
+      ? "#00A6F6"
+      : latestPlantMeasurement.value > 10
+      ? "#FFD633"
+      : "#FF4B4B"
+    : "#00A6F6";
+
   useEffect(() => {
     if (plant?.measurements.length) {
       setFileteredData(plant.measurements);
@@ -86,7 +94,7 @@ const DeviceDetail = () => {
           latestPlantMeasurement ? latestPlantMeasurement.value : 0,
           latestPlantMeasurement ? 100 - latestPlantMeasurement.value : 0,
         ],
-        backgroundColor: ["#00A6F6", "#E1F5FE"],
+        backgroundColor: [diagramColor, "#E1F5FE"],
         borderColor: ["transparent", "transparent"],
         // hoverBackgroundColor: ["#FF6384", "transparent"],
         text: "Total: 9000+",
@@ -116,8 +124,15 @@ const DeviceDetail = () => {
         label: "Vlhkost půdy (v %)",
         data: filteredData.map((measurement) => measurement.value),
         fill: false,
-        backgroundColor: "#00A6F6",
+        // backgroundColor: "#00A6F6",
         borderColor: "#E1F5FE",
+        backgroundColor: filteredData.map((measurement) =>
+          measurement.value > 20
+            ? "#00A6F6"
+            : measurement.value > 10
+            ? "#FFD633"
+            : "#FF4B4B"
+        ),
       },
     ],
   };
