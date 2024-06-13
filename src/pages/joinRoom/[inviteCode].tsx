@@ -17,7 +17,7 @@ const AcceptInvitePage: React.FunctionComponent = () => {
       setIsRedirecting(true);
       router.push(`/auth/signin?inviteToken=${inviteToken}&roomId=${roomId}`);
     } else {
-      router.push(`/joinRoom/acceptInvite/${inviteToken}&roomId=${roomId}`);
+      router.push(`/joinRoom/acceptInvite/${inviteToken}?roomId=${roomId}`);
     }
   }, [inviteToken, router, session?.user, status]);
 
