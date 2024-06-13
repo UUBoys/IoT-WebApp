@@ -232,10 +232,10 @@ const DeviceDetail = () => {
                     Offline
                   </div>
                 )}
-                <SettingsIcon
-                  className={"text-gray-300"}
-                  onClick={() => push(`/device/${query.id}/settings`)}
-                />
+                {/*<SettingsIcon*/}
+                {/*  className={"text-gray-300"}*/}
+                {/*  onClick={() => push(`/device/${query.id}/settings`)}*/}
+                {/*/>*/}
               </div>
             </div>
 
@@ -243,13 +243,13 @@ const DeviceDetail = () => {
               {plant.description}
             </p>
           </div>
-          <div
-            className={
-              "h-[200px] w-full bg-white flex flex-col gap-3 p-4 rounded-md justify-center shadow-xl"
-            }
-          >
-            <p>Naposledy </p>
-          </div>
+          {/*<div*/}
+          {/*  className={*/}
+          {/*    "h-[200px] w-full bg-white flex flex-col gap-3 p-4 rounded-md justify-center shadow-xl"*/}
+          {/*  }*/}
+          {/*>*/}
+          {/*  <p>Naposledy </p>*/}
+          {/*</div>*/}
         </div>
         <div
           className={
