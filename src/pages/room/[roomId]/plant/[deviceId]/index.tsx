@@ -116,8 +116,8 @@ const DeviceDetail = () => {
   const lineData = {
     labels: filteredData.map((measurement) =>
       filterBy.value === "day"
-        ? moment(measurement.date).format("HH:mm:ss")
-        : moment(measurement.date).format("DD. mm. yy HH:mm:ss")
+        ? moment(measurement.date).format("HH:mm")
+        : moment(measurement.date).format("DD. MM. yy HH:mm")
     ),
     datasets: [
       {
