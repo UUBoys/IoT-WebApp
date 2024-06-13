@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 const AcceptInvitePage: React.FunctionComponent = () => {
   const { query, push } = useRouter();
   const inviteToken = (query?.inviteCode as string) || "";
-  const { room } = useRoom(query?.inviteCode as string);
+  const { room } = useRoom(query?.roomId as string);
   const { joinRoomAsync } = useJoinRoom();
   const { data: session, status } = useSession();
   const [isRedirecting, setIsRedirecting] = useState(true);
@@ -16,7 +16,7 @@ const AcceptInvitePage: React.FunctionComponent = () => {
   useEffect(() => {
     if (status === "loading") return; // Wait until session is fully loaded
     if (!session?.user) {
-      push(`/auth/signin?inviteToken=${inviteToken}`);
+      push(`/auth/signin?inviteToken=${inviteToken}&roomId=${query?.roomId}`);
     } else {
       setIsRedirecting(false);
     }

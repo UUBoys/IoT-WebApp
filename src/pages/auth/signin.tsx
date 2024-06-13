@@ -27,6 +27,7 @@ const SignIn: React.FC = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const inviteToken = router.query.inviteToken as string;
+  const roomId = router.query.roomId as string;
 
   const handleStudentCredentialsLogin = async ({
     email,
@@ -44,7 +45,7 @@ const SignIn: React.FC = () => {
     } else if (res?.url) {
       const url = new URL(res.url);
       if (inviteToken) {
-        router.push(`/joinRoom/acceptInvite/${inviteToken}`);
+        router.push(`/joinRoom/acceptInvite/${inviteToken}?roomId=${roomId}`);
       } else {
         const redirectUrl = url.searchParams.get("callbackUrl");
         router.push(redirectUrl || res.url);
@@ -56,7 +57,7 @@ const SignIn: React.FC = () => {
     if (status === "loading") return; // Wait until session is fully loaded
     if (session?.user) {
       if (inviteToken) {
-        router.push(`/joinRoom/acceptInvite/${inviteToken}`);
+        router.push(`/joinRoom/acceptInvite/${inviteToken}?roomId=${roomId}`);
       } else {
         router.push("/"); // Default redirect if already logged in
       }
